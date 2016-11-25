@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  script.
+    window.fbAsyncInit = function() {
+    FB.init({
+    appId      : '1798128600435648',
+    xfbml      : true,
+    version    : 'v2.7'
+    });
+    };
+    (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  #upper-section
+    #timer-wrap
+      h2#timer 30
+      h3 time
+    #input-section
+      .section
+        input#textfield(type='text', name='textfield', autocorrect='off', autocapitalize='none')
+        h3 Artist
+  #lower-section
+    h4 current streak
+    h2#current-streak 0
+
+    h4 best streak
+    h2#best-streak 0

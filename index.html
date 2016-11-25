@@ -1,28 +1,47 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-    </style>
-  </head>
-  <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    <title>Bands</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script>
+      window.fbAsyncInit = function() {
+      FB.init({
+      appId      : '1798128600435648',
+      xfbml      : true,
+      version    : 'v2.7'
+      });
+      };
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
+    <div id="upper-section">
+      <div id="timer-wrap">
+        <h2 id="timer">30</h2>
+        <h3>time</h3>
+      </div>
+      <div id="input-section">
+        <div class="section">
+          <input id="textfield" type="text" name="textfield" autocorrect="off" autocapitalize="none"/>
+          <h3>Artist</h3>
+        </div>
+      </div>
+    </div>
+    <div id="lower-section">
+      <h4>current streak</h4>
+      <h2 id="current-streak">0</h2>
+      <h4>best streak</h4>
+      <h2 id="best-streak">0</h2>
+    </div>
+    
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <!-- <script src="/client.js"></script> -->
-    
+
     <script type="text/javascript">
       var socket = io();
       $('form').submit(function(){
@@ -30,7 +49,20 @@
         $('#m').val('');
         return false;
       });
-    </script>
 
+      socket.on('correctAnswer',function(response){
+        console.log(response);
+      });
+
+      socket.on('wrongAnswer',function(response){
+        console.log(response)
+      });
+
+    </script>
   </body>
 </html>
+
+
+
+
+
