@@ -60,6 +60,8 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 io.on('connection', function(socket){
+  console.log('user with id: '+ socket.id + ' connected');
+
   var score = 0;
   const request = require('request-promise')
   var INITTIME = 30;
@@ -70,11 +72,7 @@ io.on('connection', function(socket){
   var score = 0;
   var currentTiming;
   var currentFirstLetter = null;
-
-  console.log('user with id: '+ socket.id + ' connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
+  var gameInProgress = false
 
   socket.on('answer', function(answer){
     sendAnswerToApi(answer)
@@ -86,9 +84,12 @@ io.on('connection', function(socket){
   }
 
   function sendAnswerToApi(searchString) {
+    if (!gameInProgress) {
+      return
+    }
+
     if(currentFirstLetter != null) {
       if(currentFirstLetter != searchString.charAt(0)){
-        console.log('Wrond letter!')
         socket.emit("wrongFirstLetter", currentFirstLetter);
         return
       }
@@ -172,25 +173,22 @@ io.on('connection', function(socket){
     return returnValue
   }
 
-  function restart() {
-    //TODO: stuff
+  function startNewGame() {
+    currentFirstLetter = null;
+    time = INITTIME;
+    timeElapsed = 0;
+    rightAnswers = [];
+    score = 0;
+    currentTiming;
     currentFirstLetter = null;
   }
 
   function gameOver() {
-    restart()
-  }
-
-  function resetTime() {
-
-  }
-
-  function setNewTime() {
-
+    gameInProgress = false
   }
 
   function startTimer () {
-
+    gameInProgress = true
   }
 
 });
