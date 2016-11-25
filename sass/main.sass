@@ -1,4 +1,5 @@
-$gray: rgb(255,255,255)
+$gray: rgb(239,245,248)
+$white: rgb(255,255,255)
 
 body
   background: #ebf2f5
@@ -15,6 +16,7 @@ body
     font-weight: 100
 
   #upper-section
+    text-align: center
     #timer-wrap
       text-align: center
       width: 100%
@@ -39,14 +41,17 @@ body
           color: rgb(250, 65, 60)
     #image-carousel
       .image-wrap
-        height: 200px
-        width: 200px
         .image
-          background-color: $gray
+          background-color: $white
           height: 100%
-          margin: 20px
+          height: 100px
+          width: 100px
           background-position: center
           background-size: cover
+          margin: 0 auto
+        &.inactive
+          .image
+            background-color: $gray
 
   .section
     margin: 0 3rem

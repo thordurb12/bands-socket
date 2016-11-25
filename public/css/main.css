@@ -9,37 +9,40 @@ body {
   body h3 {
     font-size: 1rem;
     font-weight: 100; }
-  body #upper-section #timer-wrap {
-    text-align: center;
-    width: 100%; }
-    body #upper-section #timer-wrap #timer {
-      text-align: center; }
-  body #upper-section #input-section {
-    background: #fff; }
-    body #upper-section #input-section input {
-      width: 100%;
-      -webkit-appearance: textfield;
+  body #upper-section {
+    text-align: center; }
+    body #upper-section #timer-wrap {
       text-align: center;
-      background-color: white;
-      cursor: auto;
-      padding: 1em 0;
-      border-width: 0px;
-      border-style: inset;
-      border-color: #fff;
-      font-size: 4em; }
-      body #upper-section #input-section input:focus {
-        outline: 0; }
-      body #upper-section #input-section input.wrong {
-        color: #fa413c; }
-  body #upper-section #image-carousel .image-wrap {
-    height: 200px;
-    width: 200px; }
+      width: 100%; }
+      body #upper-section #timer-wrap #timer {
+        text-align: center; }
+    body #upper-section #input-section {
+      background: #fff; }
+      body #upper-section #input-section input {
+        width: 100%;
+        -webkit-appearance: textfield;
+        text-align: center;
+        background-color: white;
+        cursor: auto;
+        padding: 1em 0;
+        border-width: 0px;
+        border-style: inset;
+        border-color: #fff;
+        font-size: 4em; }
+        body #upper-section #input-section input:focus {
+          outline: 0; }
+        body #upper-section #input-section input.wrong {
+          color: #fa413c; }
     body #upper-section #image-carousel .image-wrap .image {
       background-color: white;
       height: 100%;
-      margin: 20px;
+      height: 100px;
+      width: 100px;
       background-position: center;
-      background-size: cover; }
+      background-size: cover;
+      margin: 0 auto; }
+    body #upper-section #image-carousel .image-wrap.inactive .image {
+      background-color: #eff5f8; }
   body .section {
     margin: 0 3rem; }
     body .section .col {

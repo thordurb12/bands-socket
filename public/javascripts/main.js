@@ -3,8 +3,29 @@ var currentFirstLetter = "";
 $(function() {
 
   $('#image-carousel').slick({
-    slidesToShow: 8,
-    slidesToScroll: 1
+    infinite: false,
+    slidesToShow: 11,
+    slidesToScroll: 1,
+    prevArrow: false,
+    nextArrow: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 7        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3
+        }
+      }
+    ]
   });
       
   var socket = io();
@@ -28,9 +49,21 @@ $(function() {
   }
 
   function addImage(image) {
-    debugger
-    $('#image-carousel').slick('slickAdd','<div class="image-wrap"><div class="image" style="background-image: url(' + image.url + ');"></div></div>');
-    // $('#image-carousel').slick('slickRemove',slideIndex - 1);
+    var numberOfImages = $('.has-content').length;
+    console.log(numberOfImages)
+
+    if(numberOfImages >= 11) {
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"></div></div>');
+      $('#image-carousel:last-child').slickNext()
+    }
+    else if(numberOfImages >= 5) {
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"></div></div>',numberOfImages, true);
+      $('#image-carousel').slickRemove(11);
+    } else {
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"></div></div>',5, true);
+      $('#image-carousel').slickRemove(0);
+    }
+
   }
 
   focusTextField();
