@@ -67,11 +67,9 @@ io.on('connection', function(socket){
   var time = INITTIME;
   var timeElapsed = 0;
   var rightAnswers = [];
-  var currentStreak = 0;
-  var bestStreak = 0;
+  var score = 0;
   var currentTiming;
   var currentFirstLetter = null;
-  var images = [];
 
   console.log('user with id: '+ socket.id + ' connected');
   socket.on('disconnect', function(){
@@ -90,7 +88,8 @@ io.on('connection', function(socket){
   function sendAnswerToApi(searchString) {
     if(currentFirstLetter != null) {
       if(currentFirstLetter != searchString.charAt(0)){
-        indicateWrongAnswer();
+        console.log('Wrond letter!')
+        socket.emit("wrongFirstLetter", currentFirstLetter);
         return
       }
     }
@@ -106,9 +105,11 @@ io.on('connection', function(socket){
           addRightAnswerToList(searchString);
           currentFirstLetter = getLastLetter(searchString);
           response["currentFirstLetter"] = currentFirstLetter;
+          score++
+          response["score"] = score
           socket.emit("correctAnswer", response);
         } else {
-          indicateWrongAnswer();
+          socket.emit("wrongAnswer", response);
         }
       })
       .catch(function (err) {
@@ -189,10 +190,6 @@ io.on('connection', function(socket){
   }
 
   function startTimer () {
-
-  }
-
-  function indicateWrongAnswer() {
 
   }
 

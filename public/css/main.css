@@ -3,7 +3,8 @@ body {
   margin: 0;
   font-family: "canada-type-gibson", sans-serif;
   color: #484848;
-  font-weight: 100; }
+  font-weight: 100;
+  text-align: center; }
   body h2 {
     font-size: 2rem; }
   body h3 {

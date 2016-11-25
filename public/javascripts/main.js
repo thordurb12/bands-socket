@@ -12,17 +12,21 @@ $(function() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 7        }
+          slidesToShow: 7,
+          slidesToScroll: 1    
+        }
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3        }
+          slidesToShow: 3,
+          slidesToScroll: 1      }
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 3
+          slidesToShow: 3,
+          slidesToScroll: 1
         }
       }
     ]
@@ -31,11 +35,21 @@ $(function() {
   var socket = io();
   socket.on('correctAnswer',function(response){
     console.log(response);
-    prepareNextRound(response)
+    $('#score').html(response.score);
+    prepareNextRound(response);
   });
 
   socket.on('wrongAnswer',function(response){
-    console.log(response)
+    indicateWrongAnswer()
+  });
+
+  socket.on('gameOver',function(response){
+    console.log('gameOver')
+  });
+
+  socket.on('wrongFirstLetter', function(letter) {
+    indicateWrongAnswer()
+    $('#textfield').val(letter);
   });
 
   function sendAnswerToAPI() {
