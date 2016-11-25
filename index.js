@@ -88,8 +88,6 @@ io.on('connection', function(socket){
   }
 
   function sendAnswerToApi(searchString) {
-    console.log('searchString.charAt(0): ' + searchString.charAt(0))
-    console.log('currentFirstLetter: ' + currentFirstLetter)
     if(currentFirstLetter != null) {
       if(currentFirstLetter != searchString.charAt(0)){
         indicateWrongAnswer();
@@ -98,7 +96,7 @@ io.on('connection', function(socket){
     }
     const options = {  
       method: 'GET',
-      uri: "https://api.spotify.com/v1/search?q="+ searchString +"&type=artist",
+      uri: "https://api.spotify.com/v1/search?q="+ searchString +"&limit=1&type=artist",
       json: true
     }
     request(options)  

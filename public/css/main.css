@@ -1,7 +1,7 @@
 body {
   background: #ebf2f5;
   margin: 0;
-  font-family: "canada-type-gibson" ,sans-serif;
+  font-family: "canada-type-gibson", sans-serif;
   color: #484848;
   font-weight: 100; }
   body h2 {
@@ -31,6 +31,15 @@ body {
         outline: 0; }
       body #upper-section #input-section input.wrong {
         color: #fa413c; }
+  body #upper-section #image-carousel .image-wrap {
+    height: 200px;
+    width: 200px; }
+    body #upper-section #image-carousel .image-wrap .image {
+      background-color: white;
+      height: 100%;
+      margin: 20px;
+      background-position: center;
+      background-size: cover; }
   body .section {
     margin: 0 3rem; }
     body .section .col {
@@ -52,3 +61,5 @@ body {
         height: 60px;
         margin-top: 2rem;
         font-weight: 100; }
+
+/*# sourceMappingURL=main.css.map */

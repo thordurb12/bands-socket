@@ -1,10 +1,16 @@
 var currentFirstLetter = "";
 
 $(function() {
+
+  $('#image-carousel').slick({
+    slidesToShow: 8,
+    slidesToScroll: 1
+  });
+      
   var socket = io();
   socket.on('correctAnswer',function(response){
     console.log(response);
-    $('#textfield').val(response.currentFirstLetter);
+    prepareNextRound(response)
   });
 
   socket.on('wrongAnswer',function(response){
@@ -15,12 +21,23 @@ $(function() {
     socket.emit('answer', $('#textfield').val());
   }
 
+  function prepareNextRound(response) {
+    $('#textfield').val(response.currentFirstLetter);
+    var artist = response.artists.items[0]
+    addImage(artist.images[0])
+  }
+
+  function addImage(image) {
+    debugger
+    $('#image-carousel').slick('slickAdd','<div class="image-wrap"><div class="image" style="background-image: url(' + image.url + ');"></div></div>');
+    // $('#image-carousel').slick('slickRemove',slideIndex - 1);
+  }
+
   focusTextField();
 
   $('#textfield').keydown(function (e) {
     var key = e.which;
     if(key == 13){
-
 
       sendAnswerToAPI();
     } else if (key == 8) {
