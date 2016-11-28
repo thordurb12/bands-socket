@@ -8,25 +8,33 @@ $(function() {
     slidesToScroll: 1,
     prevArrow: false,
     nextArrow: false,
+    accessibility: false,
+    focusOnSelect: false,
+    verticalSwiping: false,
+    swipe: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 7,
-          slidesToScroll: 1    
+          slidesToScroll: 1,
+          initialSlide: 6
         }
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1      }
+          slidesToScroll: 1,
+          initialSlide: 6      
+        }
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          initialSlide: 6
         }
       }
     ]
@@ -34,8 +42,6 @@ $(function() {
       
   var socket = io();
   socket.on('correctAnswer',function(response){
-    console.log(response);
-    $('#score').html(response.score);
     prepareNextRound(response);
   });
 
@@ -44,8 +50,7 @@ $(function() {
   });
 
   socket.on('gameOver',function(){
-    console.log('gameOver');
-    alert('Game over');
+    console.log('gameOver')
   });
 
   socket.on('wrongFirstLetter', function(letter) {
@@ -66,25 +71,20 @@ $(function() {
   function prepareNextRound(response) {
     $('#textfield').val(response.currentFirstLetter);
     var artist = response.artists.items[0]
-    addImage(artist.images[0])
+    addImage(artist.images[0], response.score)
   }
 
-  function addImage(image) {
+  function addImage(image,score) {
     var numberOfImages = $('.has-content').length;
-    console.log(numberOfImages)
 
-    if(numberOfImages >= 11) {
-      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"></div></div>');
-      $('#image-carousel:last-child').slickNext()
-    }
-    else if(numberOfImages >= 5) {
-      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"></div></div>',numberOfImages, true);
-      $('#image-carousel').slickRemove(11);
-    } else {
-      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"></div></div>',5, true);
-      $('#image-carousel').slickRemove(0);
+    if(score <= 9) {
+      score = "00" + score;
+    } else if (score <= 99){
+      score = "0" + score;
     }
 
+    $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"><div class="overlay"><span>' + score + '</div></div></div>',5+numberOfImages, true);
+    $('#image-carousel:last-child').slickNext()
   }
 
   focusTextField();
