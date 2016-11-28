@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/api/v1/highscores', (req, res, next) => {
+router.post('/api/highscores', (req, res, next) => {
   const results = [];
   // Grab data from http request
   const data = {name: req.body.name, score: req.body.score};
@@ -39,23 +39,23 @@ router.post('/api/v1/highscores', (req, res, next) => {
   });
 });
 
-router.get('/api/v1/highscores', (req, res, next) => {
+router.get('/api/highscores', (req, res, next) => {
   const results = [];
-  // Get a Postgres client from the connection pool
+
   pg.connect(connectionString, (err, client, done) => {
-    // Handle connection errors
+
     if(err) {
       done();
       console.log(err);
       return res.status(500).json({success: false, data: err});
     }
-    // SQL Query > Select Data
+
     const query = client.query('SELECT * FROM highscores ORDER BY id DESC;');
-    // Stream results back one row at a time
+
     query.on('row', (row) => {
       results.push(row);
     });
-    // After all data is returned, close connection and return results
+
     query.on('end', () => {
       done();
       return res.json(results);
@@ -63,14 +63,11 @@ router.get('/api/v1/highscores', (req, res, next) => {
   });
 });
 
-
-router.post('/api/v1/artist', (req, res, next) => {
+router.post('/api/artists', (req, res, next) => {
   const results = [];
-  // Grab data from http request
   const data = {uri:req.body.uri, name: req.body.name};
-  // Get a Postgres client from the connection pool
   pg.connect(connectionString, (err, client, done) => {
-    // Handle connection errors
+    
     if(err) {
       done();
       console.log(err);
@@ -84,6 +81,7 @@ router.post('/api/v1/artist', (req, res, next) => {
     query.on('row', (row) => {
       results.push(row);
     });
+    
     query.on('end', () => {
       done();
       return res.json(results);
@@ -91,5 +89,28 @@ router.post('/api/v1/artist', (req, res, next) => {
   });
 });
 
+router.get('/api/artists', (req, res, next) => {
+  const results = [];
+
+  pg.connect(connectionString, (err, client, done) => {
+
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({success: false, data: err});
+    }
+
+    const query = client.query('SELECT * FROM artists ORDER BY id DESC;');
+
+    query.on('row', (row) => {
+      results.push(row);
+    });
+
+    query.on('end', () => {
+      done();
+      return res.json(results);
+    });
+  });
+});
 
 module.exports = router;
