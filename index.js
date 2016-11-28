@@ -125,7 +125,8 @@ io.on('connection', function(socket){
 
   function storeArtistInDatabase(artist){
     const results = [];
-    const data = {uri:artist.uri, name: artist.name};
+    const uri = artist.uri.split(':')[artist.uri.split(':').length-1]
+    const data = {uri:uri, name: artist.name};
     pg.connect(connectionString, (err, client, done) => {
       if(err) {
         done();
