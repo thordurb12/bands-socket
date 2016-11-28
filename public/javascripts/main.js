@@ -43,7 +43,7 @@ $(function() {
     indicateWrongAnswer()
   });
 
-  socket.on('gameOver',function(response){
+  socket.on('gameOver',function(){
     console.log('gameOver')
   });
 
@@ -55,6 +55,12 @@ $(function() {
   function sendAnswerToAPI() {
     socket.emit('answer', $('#textfield').val());
   }
+
+  socket.on('time', function(currTime) {
+    var timer = $('#timer');
+    console.log(currTime);
+    timer.html(currTime);
+  });
 
   function prepareNextRound(response) {
     $('#textfield').val(response.currentFirstLetter);

@@ -9,6 +9,9 @@ var cookieParser = require('cookie-parser');
 var sass = require('node-sass');
 var routes = require('./routes/routes');
 
+const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
+
+
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
@@ -72,10 +75,11 @@ io.on('connection', function(socket){
   var score = 0;
   var currentTiming;
   var currentFirstLetter = null;
-  var gameInProgress = false
+  var gameInProgress = true
 
   socket.on('answer', function(answer){
     sendAnswerToApi(answer)
+    startNewGame();
   });
 
   function getLastLetter(oldSearchString) {
@@ -109,6 +113,7 @@ io.on('connection', function(socket){
           score++
           response["score"] = score
           socket.emit("correctAnswer", response);
+          setNewTime();
         } else {
           socket.emit("wrongAnswer", response);
         }
@@ -179,17 +184,39 @@ io.on('connection', function(socket){
     timeElapsed = 0;
     rightAnswers = [];
     score = 0;
-    currentTiming;
     currentFirstLetter = null;
+    startTimer();
   }
 
   function gameOver() {
     gameInProgress = false
+    clearInterval(currentTiming);
+    socket.emit('gameOver')
   }
 
-  function startTimer () {
-    gameInProgress = true
-  }
+
+function startTimer () {
+  gameInProgress = true
+  currentTiming = setInterval(function() {
+    time = time - 1;
+    socket.emit('time', time);
+    if(time == 0)
+      gameOver();
+  }, 1000)
+}
+
+function resetTime() {
+  clearInterval(currentTiming);
+  time = INITTIME;
+}
+
+function setNewTime() {
+  console.log("currentTiming: " + currentTiming)
+  clearInterval(currentTiming);
+
+  time = Math.min(MAXTIME, time+5);
+  startTimer();
+}
 
 });
 

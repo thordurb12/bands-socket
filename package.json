@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon server.js"
+    "build-css": "node-sass --include-path sass sass/main.sass   public/css/main.css",
+    "watch-css": "nodemon -e sass -x \"npm run build-css\""
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -13,13 +14,10 @@
     "jade": "~1.11.0",
     "mongodb": "^2.2.10",
     "morgan": "~1.7.0",
+    "pg": "^6.1.0",
     "request": "^2.75.0",
     "request-promise": "^4.1.1",
     "serve-favicon": "~2.3.0"
-  },
-  "scripts": {
-    "build-css": "node-sass --include-path sass sass/main.sass   public/css/main.css",
-    "watch-css": "nodemon -e sass -x \"npm run build-css\""
   },
   "devDependencies": {
     "node-sass": "^3.12.5",
