@@ -72,13 +72,14 @@ io.on('connection', function(socket){
   var timeElapsed = 0;
   var rightAnswers = [];
   var score = 0;
-  var currentTiming;
+  var currentTiming = null;
   var currentFirstLetter = null;
   var gameInProgress = true
 
   socket.on('answer', function(answer){
     sendAnswerToApi(answer)
-    startNewGame();
+    if (!gameInProgress)
+      startNewGame();
   });
 
   function getLastLetter(oldSearchString) {
@@ -104,16 +105,15 @@ io.on('connection', function(socket){
     }
     request(options)  
       .then(function (response) {
-        console.log(response)
         if(checkAnswer(response, searchString) == true) {
           addRightAnswerToList(searchString);
           currentFirstLetter = getLastLetter(searchString);
           response["currentFirstLetter"] = currentFirstLetter;
           score++
           response["score"] = score
+          setNewTime();
           socket.emit("correctAnswer", response);
           storeArtistInDatabase(response.artists.items[0])
-          setNewTime();
         } else {
           socket.emit("wrongAnswer", response);
         }
@@ -188,11 +188,7 @@ io.on('connection', function(socket){
   }
 
   function addRightAnswerToList(answer) {
-    console.log(rightAnswers);
-    console.log(answer);
-
     rightAnswers.push(answer);
-    console.log(rightAnswers);
   }
 
   function compareWordToResponseList(list, word) {
@@ -242,18 +238,23 @@ io.on('connection', function(socket){
 
   function gameOver() {
     gameInProgress = false
+    
     clearInterval(currentTiming);
+    currentTiming = undefined
+
     socket.emit('gameOver')
   }
 
   function startTimer () {
     gameInProgress = true
+    
     currentTiming = setInterval(function() {
       time = time - 1;
-      socket.emit('time', time);
       if(time == 0)
         gameOver();
+      socket.emit('time', time);
     }, 1000)
+  
   }
 
   function resetTime() {
@@ -262,9 +263,8 @@ io.on('connection', function(socket){
   }
 
   function setNewTime() {
-    console.log("currentTiming: " + currentTiming)
-    clearInterval(currentTiming);
-
+    clearInterval(currentTiming);  
+    currentTiming = null
     time = Math.min(MAXTIME, time+5);
     startTimer();
   }

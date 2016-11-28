@@ -44,7 +44,8 @@ $(function() {
   });
 
   socket.on('gameOver',function(){
-    console.log('gameOver')
+    console.log('gameOver');
+    alert('Game over');
   });
 
   socket.on('wrongFirstLetter', function(letter) {
