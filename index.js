@@ -8,9 +8,8 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var sass = require('node-sass');
 var routes = require('./routes/routes');
-
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
-
+const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/bands';
+const pg = require('pg');
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
@@ -113,6 +112,7 @@ io.on('connection', function(socket){
           score++
           response["score"] = score
           socket.emit("correctAnswer", response);
+          storeArtistInDatabase(response.artists.items[0])
           setNewTime();
         } else {
           socket.emit("wrongAnswer", response);
@@ -121,6 +121,57 @@ io.on('connection', function(socket){
       .catch(function (err) {
         console.log(err);
       })
+  }
+
+  function storeArtistInDatabase(artist){
+    const results = [];
+    const data = {uri:artist.uri, name: artist.name};
+    pg.connect(connectionString, (err, client, done) => {
+      if(err) {
+        done();
+        console.log(err);
+      }
+      client.query('WITH upsert AS (UPDATE artists SET count=count+1, name=($2) WHERE uri=($1) RETURNING *) INSERT INTO artists (uri, name, count) SELECT ($1),($2),1 WHERE NOT EXISTS (SELECT * FROM upsert);',
+      [data.uri, data.name]);
+      
+      const query = client.query('SELECT * FROM artists ORDER BY count DESC');
+      query.on('row', (row) => {
+        results.push(row);
+      });
+
+      query.on('end', () => {
+        done();
+        return results;
+      });
+    });
+  }
+
+  function submitHighscore(name) {
+    const results = [];
+      // Grab data from http request
+      const data = {name: name, score: score};
+      // Get a Postgres client from the connection pool
+      pg.connect(connectionString, (err, client, done) => {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+        }
+        // SQL Query > Insert data
+        client.query('INSERT INTO highscores(name, score) values($1, $2)',
+        [data.name, data.score]);
+        // SQL Query > Select Data
+        const query = client.query('SELECT * FROM items ORDER BY id ASC');
+        // Stream results back one row at a time
+        query.on('row', (row) => {
+          results.push(row);
+        });
+        // After all data is returned, close connection and return results
+        query.on('end', () => {
+          done();
+          return results;
+        });
+      });
   }
 
   function checkAnswer(response, searchString) {
@@ -194,29 +245,28 @@ io.on('connection', function(socket){
     socket.emit('gameOver')
   }
 
+  function startTimer () {
+    gameInProgress = true
+    currentTiming = setInterval(function() {
+      time = time - 1;
+      socket.emit('time', time);
+      if(time == 0)
+        gameOver();
+    }, 1000)
+  }
 
-function startTimer () {
-  gameInProgress = true
-  currentTiming = setInterval(function() {
-    time = time - 1;
-    socket.emit('time', time);
-    if(time == 0)
-      gameOver();
-  }, 1000)
-}
+  function resetTime() {
+    clearInterval(currentTiming);
+    time = INITTIME;
+  }
 
-function resetTime() {
-  clearInterval(currentTiming);
-  time = INITTIME;
-}
+  function setNewTime() {
+    console.log("currentTiming: " + currentTiming)
+    clearInterval(currentTiming);
 
-function setNewTime() {
-  console.log("currentTiming: " + currentTiming)
-  clearInterval(currentTiming);
-
-  time = Math.min(MAXTIME, time+5);
-  startTimer();
-}
+    time = Math.min(MAXTIME, time+5);
+    startTimer();
+  }
 
 });
 

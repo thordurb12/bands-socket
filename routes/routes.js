@@ -63,31 +63,6 @@ router.get('/api/highscores', (req, res, next) => {
   });
 });
 
-router.post('/api/artists', (req, res, next) => {
-  const results = [];
-  const data = {uri:req.body.uri, name: req.body.name};
-  pg.connect(connectionString, (err, client, done) => {
-    
-    if(err) {
-      done();
-      console.log(err);
-      return res.status(500).json({success: false, data: err});
-    }
-
-    client.query('WITH upsert AS (UPDATE artists SET count=count+1, name=($2) WHERE uri=($1) RETURNING *) INSERT INTO artists (uri, name, count) SELECT ($1),($2),1 WHERE NOT EXISTS (SELECT * FROM upsert);',
-    [data.uri, data.name]);
-    
-    const query = client.query('SELECT * FROM artists ORDER BY count DESC');
-    query.on('row', (row) => {
-      results.push(row);
-    });
-    
-    query.on('end', () => {
-      done();
-      return res.json(results);
-    });
-  });
-});
 
 router.get('/api/artists', (req, res, next) => {
   const results = [];
@@ -100,7 +75,7 @@ router.get('/api/artists', (req, res, next) => {
       return res.status(500).json({success: false, data: err});
     }
 
-    const query = client.query('SELECT * FROM artists ORDER BY id DESC;');
+    const query = client.query('SELECT * FROM artists ORDER BY count DESC;');
 
     query.on('row', (row) => {
       results.push(row);
