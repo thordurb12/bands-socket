@@ -19,11 +19,11 @@ block content
   #upper-section
     #timer-wrap
       h2#timer 30
-      h3 time
+      h3 TIME
     #input-section
       .section
         input#textfield(type='text', name='textfield', autocorrect='off', autocapitalize='none')
-        h3 Artist
+        h3 ARTIST
     #image-carousel
       .image-wrap.inactive
         .image
@@ -62,4 +62,17 @@ block content
         .image
           .overlay
   #lower-section
-    h3 Score
+
+
+    h3 SCORE
+    #instructions
+      p Curabitur blandit tempus porttitor. Curabitur blandit tempus porttitor. Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    #highscore-wrap 
+      #highscores
+        h3 HIGH SCORES
+        .row
+
+    script#highscore-row(type='x-tmpl-mustache').
+      <div class="row"><div class="index">{{index}}</div><div class="name">{{ name }}</div><div class="score">{{ score }}</div></div>
+
+

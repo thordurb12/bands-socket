@@ -39,7 +39,9 @@ $(function() {
       }
     ]
   });
-      
+  
+  showHighscores()
+
   var socket = io();
   socket.on('correctAnswer',function(response){
     prepareNextRound(response);
@@ -133,6 +135,30 @@ function addImage(image) {
   }
 }
 
+function showHighscores() {
+  var template = $('#highscore-row').html();
+  Mustache.parse(template);
+  var index = 1;
+  var request = $.get('/api/highscores' , function(res) {
+    for (var key in res) {
+      var entry = res[key]
+      var entryIndex = index;
+      if(entryIndex <= 9) {
+        entryIndex = "00" + entryIndex;
+      } else if (score <= 99){
+        entryIndex = "0" + entryIndex;
+      }
+      var rendered = Mustache.render(template, {index: entryIndex, name: entry.name, score: entry.score});
+      index++;
+      $('#highscores').append(rendered);
+    }
+  })
+  .fail(function() {
+    console.log('error')
+  });
+ 
+}
+
 function displayImages () {
   var screenHeight = $(window).height();
   var screenWidth = $(window).width(); 
@@ -147,7 +173,6 @@ function displayImages () {
   }
 
   $('#overlay').css("width",imagesInRow*imageSize);
-
   _.each(images, function(image) {
     // image.height = imageSize;
     image.width = imageSize;
