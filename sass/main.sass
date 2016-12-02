@@ -4,6 +4,11 @@ $border-color: rgb(177,178,177)
 $lighter-border-color: rgb(207,214,215)
 $blue:  #ebf2f5
 $font-color: rgb(76,76,76)
+$button-blue: rgb(104,179,202)
+$button-border: rgb(104,179,202)
+
+body
+  overflow-x: hidden
 
 .center
   display: -webkit-flex
@@ -14,6 +19,17 @@ $font-color: rgb(76,76,76)
   align-items: center
   -webkit-justify-content: center
   justify-content: center
+
+.hide
+  display: none !important
+
+.button
+  padding: 5px 0px
+  background: $button-blue
+  color: $white
+  border: 1px solid $button-border
+  &:hover
+    cursor: pointer
 
 body
   background: $blue
@@ -37,12 +53,12 @@ body
       width: 100%
       #timer
         font-weight: 500
-        margin: 50px 0px 0px 0px
+        margin: 0px 0px 0px 0px
         padding: 0px
         font-size: 40px
       h3
         margin: 0px 0px 0px 0px
-        padding: 0px 0px 20px 0px
+        padding: 0px 0px 0px 0px
 
     #input-section
       background: #fff
@@ -53,7 +69,7 @@ body
         text-align: center
         background-color: white
         cursor: auto
-        padding: 50px 0 5px 0px
+        padding: 5px 0 5px 0px
         border-width: 0px
         border-style: inset
         border-color: #fff
@@ -61,8 +77,6 @@ body
         font-weight: 800
         &:focus
           outline: 0
-        &.wrong 
-          color: rgb(250, 65, 60)
 
     #image-carousel
       .image-wrap
@@ -103,36 +117,30 @@ body
       -moz-user-select: none     /* Firefox */
       -ms-user-select: none       /* Internet Explorer/Edge */
       user-select: none
-    h3
-      padding: 0px 0px 50px 0px
 
 #instructions
-  width: 50vw
-  margin: 0 auto
   padding-bottom: 3rem
 
-#highscore-wrap
-  width: 50em
-  @media (max-width: 600px)
+
+#submit-wrap
+  input
+    padding: 5px 0px
+    border: 1px solid $border-color
     width: 100%
-  margin: 0 auto
-  border-bottom: 1px solid $border-color
-  border-top: 1px solid $border-color
-  padding-bottom: 2rem
+  .button
+    width: 100%
+
+#highscore-wrap
+  #highscore-container
+    border-bottom: 1px solid $border-color
+    border-top: 1px solid $border-color
 
   #highscores
+    padding-bottom: 2rem
     .row
-      display: flex
-      width: 25vw
       padding: 0 5px
       margin: 0 auto
-      @media (max-width: 1024px)
-        width: 40vw
-      @media (max-width: 600px)
-        width: 80vw
-      @media (max-width: 400px)
-        width: 100vw
-        background: $blue
+      background: $blue
       &:nth-child(even)
         background: $white
       .index
@@ -145,3 +153,25 @@ body
       .score
         flex-basis: 40%
         text-align: right
+
+#all-images-wrap
+  max-height: 20rem
+  overflow: hidden
+  border-bottom: 1px solid $border-color
+  padding-bottom: 1rem
+  &.show-all
+    max-height: none
+  #all-images
+    .image-wrap 
+      div
+        width: 100%
+        padding-top: 100%
+        background-size: cover
+        background-position: center
+        margin-top: 1rem
+
+#load-more-button-wrap
+  text-align: center
+  span 
+    &:hover
+      cursor: pointer

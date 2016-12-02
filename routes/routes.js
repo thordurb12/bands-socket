@@ -14,14 +14,13 @@ router.get('/api/highscores', (req, res, next) => {
   const results = [];
 
   pg.connect(connectionString, (err, client, done) => {
-
     if(err) {
       done();
       console.log(err);
       return res.status(500).json({success: false, data: err});
     }
 
-    const query = client.query('SELECT * FROM highscores ORDER BY id DESC;');
+    const query = client.query('SELECT * FROM highscores ORDER BY score DESC;');
 
     query.on('row', (row) => {
       results.push(row);
@@ -56,6 +55,25 @@ router.get('/api/artists', (req, res, next) => {
       return res.json(results);
     });
   });
+});
+
+
+router.get('/api/ranking', (req, res, next) => {
+    const results = [];
+    const data = {score: req.query.score};
+    pg.connect(connectionString, (err, client, done) => {
+      if(err) { 
+        done();
+        console.log(err);
+      }
+
+      const query = client.query('select COUNT(*) from highscores where score > ($1);',
+      [data.score]);
+
+      query.on('row', (row) => {
+        return res.json(row)
+      });
+    });
 });
 
 module.exports = router;

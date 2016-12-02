@@ -82,6 +82,10 @@ io.on('connection', function(socket){
       startNewGame();
   });
 
+  socket.on('submitHighscore', function(name){
+    submitHighscore(name);
+  });
+
   function getLastLetter(oldSearchString) {
     var lastLetter = oldSearchString[oldSearchString.length - 1];
     return lastLetter;
@@ -242,7 +246,7 @@ io.on('connection', function(socket){
     clearInterval(currentTiming);
     currentTiming = undefined
 
-    socket.emit('gameOver')
+    socket.emit('gameOver', score)
   }
 
   function startTimer () {

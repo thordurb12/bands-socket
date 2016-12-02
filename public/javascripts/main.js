@@ -1,4 +1,6 @@
 var currentFirstLetter = "";
+var score = 0;
+var images = []
 
 $(function() {
 
@@ -44,6 +46,7 @@ $(function() {
 
   var socket = io();
   socket.on('correctAnswer',function(response){
+    score = response.score
     prepareNextRound(response);
   });
 
@@ -51,8 +54,10 @@ $(function() {
     indicateWrongAnswer()
   });
 
-  socket.on('gameOver',function(){
+  socket.on('gameOver',function(score){
     console.log('gameOver')
+      
+    gameOver(score);
   });
 
   socket.on('wrongFirstLetter', function(letter) {
@@ -78,7 +83,7 @@ $(function() {
 
   function addImage(image,score) {
     var numberOfImages = $('.has-content').length;
-
+    addToImageWall(image)
     if(score <= 9) {
       score = "00" + score;
     } else if (score <= 99){
@@ -89,7 +94,60 @@ $(function() {
     $('#image-carousel:last-child').slickNext()
   }
 
+  function gameOver(score) {
+    $('.inactive-game').removeClass('hide');
+    $('.active-game').addClass('hide');
+    var textfield = $('#textfield')
+    textfield.val(score);
+    textfield.disabled = true
+    textfield.blur();
+    var request = $.get('/api/ranking?score='+score , function(res) {
+      var ranking = parseInt(res.count) + 1;
+      $('#world-ranking').html('YOU RANK NO. <b>'+ ranking + '</b> WORLDWIDE');
+    })
+    .fail(function() {
+      console.log('error')
+    });
+
+    displayImages();
+  }
+
+  function playAgain() {
+    var textfield = $('#textfield')
+    $('.inactive-game').addClass('hide');
+    $('.active-game').removeClass('hide');
+    focusTextField();
+    $('#timer').html("30");
+    $('.has-content').remove();
+    $('#all-images').html('');
+    $('#all-images-wrap').removeClass('show-all')
+    textfield.disabled = false
+    images = []
+    score = 0
+  }
+
   focusTextField();
+
+  function submitHighscore(name) {
+    socket.emit('submitHighscore', name);
+  }
+  
+  $('#submit-button').click(function(e) {
+    var name = $('#submit-input').val()
+    if(name.length > 0) {
+      submitHighscore(name)
+    }
+  })
+  
+  $('#load-more-button').click(function(e) {
+    var target = $('#all-images-wrap');
+    target.addClass('show-all');
+    $(e.target).addClass('hide');
+  })
+
+  $('#replay-button').click(function(e) {
+    playAgain();
+  })
 
   $('#textfield').keydown(function (e) {
     var key = e.which;
@@ -126,7 +184,7 @@ function indicateWrongAnswer() {
   $("#textfield").effect( "shake", {times:1}, 200 );
 }
 
-function addImage(image) {
+function addToImageWall(image) {
   if(image != undefined){
     var url = image.url
     var image = new Image()
@@ -136,12 +194,20 @@ function addImage(image) {
 }
 
 function showHighscores() {
-  var template = $('#highscore-row').html();
-  Mustache.parse(template);
-  var index = 1;
   var request = $.get('/api/highscores' , function(res) {
-    for (var key in res) {
-      var entry = res[key]
+    renderHighscore(res)
+  })
+  .fail(function() {
+    console.log('error')
+  });
+}
+
+function renderHighscore(list) {
+    var template = $('#highscore-row').html();
+    Mustache.parse(template);
+    var index = 1;
+    for (var key in list) {
+      var entry = list[key]
       var entryIndex = index;
       if(entryIndex <= 9) {
         entryIndex = "00" + entryIndex;
@@ -152,38 +218,19 @@ function showHighscores() {
       index++;
       $('#highscores').append(rendered);
     }
-  })
-  .fail(function() {
-    console.log('error')
-  });
- 
 }
 
 function displayImages () {
-  var screenHeight = $(window).height();
-  var screenWidth = $(window).width(); 
-  var imageCount = images.length;
-  var imageSize = Math.sqrt((screenHeight*screenWidth)/imageCount);
-
-  var imagesInRow = Math.ceil(screenWidth / imageSize);
-  var numberOfRows = Math.ceil(images.length/imagesInRow);
-
-  if((screenHeight) - (numberOfRows*imageSize) > 0) {
-    imageSize = imageSize + ((screenHeight) - (numberOfRows*imageSize))/numberOfRows;
-  }
-
-  $('#overlay').css("width",imagesInRow*imageSize);
+  var target = $('#all-images')
   _.each(images, function(image) {
-    // image.height = imageSize;
-    image.width = imageSize;
-    $('#overlay').prepend('<div class="image-wrap" style="height:' + imageSize +'px; width: ' + imageSize +'px;"></div>');
-    $('#overlay div').first().html(image);
-    $('#overlay div img').first().css({
-                                        "min-height": imageSize,
-                                        "min-width" : imageSize
-                                      });
+    var div = document.createElement('div');
+    div.style.backgroundImage = "url("+image.src+")";
+    target.append('<div class="image-wrap col-xs-12 col-sm-4 col-md-3 col-lg-2"</div>');
+    $('.image-wrap').last().html(div);
+
   });
 }
+
 function focusTextField() {
   var textfield = $('#textfield');
   textfield.focus();

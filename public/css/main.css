@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden; }
+
 .center, body #upper-section #image-carousel .image-wrap.has-content .overlay {
   display: -webkit-flex;
   display: flex;
@@ -7,6 +10,17 @@
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center; }
+
+.hide {
+  display: none !important; }
+
+.button {
+  padding: 5px 0px;
+  background: #68b3ca;
+  color: white;
+  border: 1px solid #68b3ca; }
+  .button:hover {
+    cursor: pointer; }
 
 body {
   background: #ebf2f5;
@@ -27,12 +41,12 @@ body {
       width: 100%; }
       body #upper-section #timer-wrap #timer {
         font-weight: 500;
-        margin: 50px 0px 0px 0px;
+        margin: 0px 0px 0px 0px;
         padding: 0px;
         font-size: 40px; }
       body #upper-section #timer-wrap h3 {
         margin: 0px 0px 0px 0px;
-        padding: 0px 0px 20px 0px; }
+        padding: 0px 0px 0px 0px; }
     body #upper-section #input-section {
       background: #fff;
       margin: 30px 0; }
@@ -42,7 +56,7 @@ body {
         text-align: center;
         background-color: white;
         cursor: auto;
-        padding: 50px 0 5px 0px;
+        padding: 5px 0 5px 0px;
         border-width: 0px;
         border-style: inset;
         border-color: #fff;
@@ -50,8 +64,6 @@ body {
         font-weight: 800; }
         body #upper-section #input-section input:focus {
           outline: 0; }
-        body #upper-section #input-section input.wrong {
-          color: #fa413c; }
     body #upper-section #image-carousel .image-wrap .image {
       background-color: white;
       height: 100%;
@@ -85,38 +97,26 @@ body {
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none; }
-    body .section h3 {
-      padding: 0px 0px 50px 0px; }
 
 #instructions {
-  width: 50vw;
-  margin: 0 auto;
   padding-bottom: 3rem; }
 
-#highscore-wrap {
-  width: 50em;
-  margin: 0 auto;
+#submit-wrap input {
+  padding: 5px 0px;
+  border: 1px solid #b1b2b1;
+  width: 100%; }
+#submit-wrap .button {
+  width: 100%; }
+
+#highscore-wrap #highscore-container {
   border-bottom: 1px solid #b1b2b1;
-  border-top: 1px solid #b1b2b1;
+  border-top: 1px solid #b1b2b1; }
+#highscore-wrap #highscores {
   padding-bottom: 2rem; }
-  @media (max-width: 600px) {
-    #highscore-wrap {
-      width: 100%; } }
   #highscore-wrap #highscores .row {
-    display: flex;
-    width: 25vw;
     padding: 0 5px;
-    margin: 0 auto; }
-    @media (max-width: 1024px) {
-      #highscore-wrap #highscores .row {
-        width: 40vw; } }
-    @media (max-width: 600px) {
-      #highscore-wrap #highscores .row {
-        width: 80vw; } }
-    @media (max-width: 400px) {
-      #highscore-wrap #highscores .row {
-        width: 100vw;
-        background: #ebf2f5; } }
+    margin: 0 auto;
+    background: #ebf2f5; }
     #highscore-wrap #highscores .row:nth-child(even) {
       background: white; }
     #highscore-wrap #highscores .row .index {
@@ -129,5 +129,24 @@ body {
     #highscore-wrap #highscores .row .score {
       flex-basis: 40%;
       text-align: right; }
+
+#all-images-wrap {
+  max-height: 20rem;
+  overflow: hidden;
+  border-bottom: 1px solid #b1b2b1;
+  padding-bottom: 1rem; }
+  #all-images-wrap.show-all {
+    max-height: none; }
+  #all-images-wrap #all-images .image-wrap div {
+    width: 100%;
+    padding-top: 100%;
+    background-size: cover;
+    background-position: center;
+    margin-top: 1rem; }
+
+#load-more-button-wrap {
+  text-align: center; }
+  #load-more-button-wrap span:hover {
+    cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */
