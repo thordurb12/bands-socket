@@ -48,8 +48,7 @@ body {
         margin: 0px 0px 0px 0px;
         padding: 0px 0px 0px 0px; }
     body #upper-section #input-section {
-      background: #fff;
-      margin: 30px 0; }
+      background: #fff; }
       body #upper-section #input-section input {
         width: 100%;
         -webkit-appearance: textfield;
@@ -87,17 +86,27 @@ body {
         color: #fff;
         font-weight: 600;
         font-size: 1.5em; }
-  body .section {
+
+@media screen and (max-width: 480px) {
+  .image-wrap.hide-for-small {
+    display: none !important; } }
+@media screen and (max-width: 600px) {
+  .image-wrap.hide-for-medium {
+    display: none !important; } }
+@media screen and (max-width: 1024px) {
+  .image-wrap.hide-for-large {
+    display: none !important; }
+
+  .section {
     margin: 0 3rem; }
-    body .section h3, body .section h2 {
+    .section h3, .section h2 {
       padding: 0 0 0 0;
       margin: 0px;
       -webkit-user-select: none;
       -khtml-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
-      user-select: none; }
-
+      user-select: none; } }
 #instructions {
   padding-bottom: 3rem; }
 

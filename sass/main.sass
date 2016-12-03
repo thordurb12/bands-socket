@@ -7,6 +7,10 @@ $font-color: rgb(76,76,76)
 $button-blue: rgb(104,179,202)
 $button-border: rgb(104,179,202)
 
+$break-small: 480px
+$break-medium: 600px
+$break-large: 1024px
+
 body
   overflow-x: hidden
 
@@ -62,7 +66,6 @@ body
 
     #input-section
       background: #fff
-      margin: 30px 0
       input
         width: 100%
         -webkit-appearance: textfield
@@ -106,6 +109,16 @@ body
               color: #fff
               font-weight: 600
               font-size: 1.5em
+
+@media screen and (max-width: $break-small)
+  .image-wrap.hide-for-small
+    display: none !important
+@media screen and (max-width: $break-medium) 
+  .image-wrap.hide-for-medium
+    display: none !important
+@media screen and (max-width: $break-large) 
+  .image-wrap.hide-for-large
+    display: none !important
 
   .section
     margin: 0 3rem
