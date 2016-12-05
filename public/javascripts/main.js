@@ -116,6 +116,7 @@ $(function() {
     var textfield = $('#textfield')
     $('.inactive-game').addClass('hide');
     $('.active-game').removeClass('hide');
+    $('#thanks-wrap').addClass('hide');
     focusTextField();
     $('#timer').html("30");
     $('.has-content').remove();
@@ -132,6 +133,11 @@ $(function() {
     socket.emit('submitHighscore', name);
   }
   
+  socket.on('highscorecSubmitted', function() {
+    $('#submit-wrap').addClass('hide');
+    $('#thanks-wrap').removeClass('hide');
+  })
+
   $('#submit-button').click(function(e) {
     var name = $('#submit-input').val()
     if(name.length > 0) {

@@ -84,6 +84,7 @@ io.on('connection', function(socket){
 
   socket.on('submitHighscore', function(name){
     submitHighscore(name);
+    socket.emit('highscorecSubmitted', name)
   });
 
   function getLastLetter(oldSearchString) {
