@@ -39,14 +39,15 @@ body {
     text-align: center; }
     body #upper-section .wrap {
       padding: 50px 0px 45px 0px; }
-    body #upper-section #timer-wrap {
+    body #upper-section #timer-wrap, body #upper-section #replay-section {
+      height: 180px;
       text-align: center;
       width: 100%; }
-      body #upper-section #timer-wrap #timer {
+      body #upper-section #timer-wrap #timer, body #upper-section #replay-section #timer {
         font-weight: 500;
         margin: 0px 0px 0px 0px;
         padding: 0px; }
-      body #upper-section #timer-wrap h3 {
+      body #upper-section #timer-wrap h3, body #upper-section #replay-section h3 {
         margin: 0px 0px 0px 0px;
         padding: 0px 0px 0px 0px; }
     body #upper-section #input-section {
@@ -127,7 +128,7 @@ body {
     text-indent: 15px; }
   #submit-wrap .button {
     width: 100%; }
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 600px) {
       #submit-wrap .button {
         margin-top: 10px; } }
 

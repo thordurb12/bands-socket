@@ -84,6 +84,7 @@ $(function() {
   function addImage(image,score) {
     var numberOfImages = $('.has-content').length;
     addToImageWall(image)
+
     if(score <= 9) {
       score = "0" + score;
     } else if (score <= 99){
@@ -117,14 +118,16 @@ $(function() {
 
   function playAgain() {
     var textfield = $('#textfield')
+    $('.has-content').remove();
     $('.inactive-game').addClass('hide');
     $('.active-game').removeClass('hide');
     $('#thanks-wrap').addClass('hide');
     focusTextField();
     $('#timer').html("30");
-    $('.has-content').remove();
     $('#all-images').html('');
     $('#all-images-wrap').removeClass('show-all')
+    $('#image-carousel').slickGoTo(0)
+
     textfield.disabled = false
     textfield.val('')
     images = []
@@ -150,9 +153,7 @@ $(function() {
   })
   
   $('#load-more-button').click(function(e) {
-    var target = $('#all-images-wrap');
-    target.addClass('show-all');
-    $(e.target).addClass('hide');
+    showAllImages()
   })
 
   $('#replay-button').click(function(e) {
@@ -228,6 +229,21 @@ function renderHighscore(list) {
     }
 }
 
+
+  function checkOverflow(el) {
+   var curOverflow = el.style.overflow;
+
+   if ( !curOverflow || curOverflow === "visible" )
+      el.style.overflow = "hidden";
+
+   var isOverflowing = el.clientWidth < el.scrollWidth 
+      || el.clientHeight < el.scrollHeight;
+
+   el.style.overflow = curOverflow;
+
+   return isOverflowing;
+  }
+
 function displayImages () {
   var target = $('#all-images')
   _.each(images, function(image) {
@@ -244,6 +260,18 @@ function displayImages () {
       target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"><div class="placeholder"></div></div>');
   }
 
+  var isOverflowing = checkOverflow(document.getElementById('all-images-wrap'))
+  
+  if(!isOverflowing || images.length < 4) {
+    $('#load-more-button').addClass('hide');
+  }
+
+}
+
+function showAllImages() {
+  var target = $('#all-images-wrap');
+  target.addClass('show-all');
+  $('#load-more-button').addClass('hide');  
 }
 
 function focusTextField() {
