@@ -1,5 +1,6 @@
 $gray: rgb(239,245,248)
 $white: rgb(255,255,255)
+$black: rgb(35,35,35)
 $border-color: rgb(177,178,177)
 $lighter-border-color: rgb(207,214,215)
 $blue:  #ebf2f5
@@ -10,9 +11,6 @@ $button-border: rgb(104,179,202)
 $break-small: 480px
 $break-medium: 600px
 $break-large: 1024px
-
-body
-  overflow-x: hidden
 
 .center
   display: -webkit-flex
@@ -28,30 +26,39 @@ body
   display: none !important
 
 .button
-  padding: 5px 0px
+  padding: 10px 0px
   background: $button-blue
   color: $white
+  letter-spacing: 1px
   border: 1px solid $button-border
   &:hover
     cursor: pointer
 
 body
   background: $blue
+  // background-image: url("../images/NameTheBand_01.png")
+  // background-repeat: no-repeat
+
   margin: 0
   font-family: "canada-type-gibson" ,sans-serif
   color: $font-color
-  font-weight: 100
+  font-weight: 400
   text-align: center
-
+  overflow-x: hidden
+  
   h2
-    font-size: 2rem
+    font-size: 4rem
+    color: $black
 
   h3
-    font-size: 1rem
-    font-weight: 100
+    font-size: 0.6rem
+    font-weight: 400
+    letter-spacing: 2px
 
   #upper-section
     text-align: center
+    .wrap
+      padding: 50px 0px 45px 0px
     #timer-wrap
       text-align: center
       width: 100%
@@ -59,33 +66,36 @@ body
         font-weight: 500
         margin: 0px 0px 0px 0px
         padding: 0px
-        font-size: 40px
       h3
         margin: 0px 0px 0px 0px
         padding: 0px 0px 0px 0px
 
     #input-section
       background: #fff
+      .section
+        padding: 35px 0
+
       input
         width: 100%
         -webkit-appearance: textfield
         text-align: center
         background-color: white
         cursor: auto
+        color: $black
         padding: 5px 0 5px 0px
         border-width: 0px
         border-style: inset
         border-color: #fff
-        font-size: 40px
+        font-size: 3.5rem
         font-weight: 800
         &:focus
           outline: 0
 
     #image-carousel
+      margin: 20px 0px 0px 0px
       .image-wrap
         .image
           background-color: $white
-          height: 100%
           height: 100px
           width: 100px
           background-position: center
@@ -119,7 +129,6 @@ body
 @media screen and (max-width: $break-large) 
   .image-wrap.hide-for-large
     display: none !important
-
   .section
     margin: 0 3rem
     h3,h2
@@ -132,26 +141,40 @@ body
       user-select: none
 
 #instructions
-  padding-bottom: 3rem
+  padding: 2.5rem 1rem
 
+#submit-and-results
+  margin-top: 20px
 
 #submit-wrap
+  width: 100%
   input
-    padding: 5px 0px
+    padding: 13px 0px
     border: 1px solid $border-color
     width: 100%
+    text-indent: 15px
   .button
     width: 100%
+    @media screen and (max-width: $break-small)
+      margin-top: 10px
+
+#replay-button
+  margin: 75px 0px
+  font-weight: 800
 
 #highscore-wrap
+  padding-bottom: 3rem
   #highscore-container
     border-bottom: 1px solid $border-color
     border-top: 1px solid $border-color
 
   #highscores
     padding-bottom: 2rem
+    padding: 20px 20px
+    h3
+      font-size: 0.7rem
     .row
-      padding: 0 5px
+      padding: 5px
       margin: 0 auto
       background: $blue
       &:nth-child(even)
@@ -159,19 +182,21 @@ body
       .index
         flex-basis: 10%
         text-align: left
-        font-weight: 500
+        font-weight: 600
       .name
         flex-basis: 50%
         text-align: left
+        font-weight: 400
       .score
         flex-basis: 40%
         text-align: right
+        font-weight: 400
 
 #all-images-wrap
-  max-height: 20rem
   overflow: hidden
   border-bottom: 1px solid $border-color
   padding-bottom: 1rem
+  max-height: 25vh
   &.show-all
     max-height: none
   #all-images

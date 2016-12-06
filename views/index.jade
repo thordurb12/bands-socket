@@ -19,14 +19,16 @@ block content
   #upper-section
     
     #replay-section.inactive-game.hide.row.center
-      .col-xs-10.col-sm-5.col-md-3.col-lg-3
+      .col-xs-10.col-sm-5.col-md-2.col-lg-2
         .button#replay-button PLAY AGAIN
 
-    #timer-wrap.active-game
-      h2#timer 30
-      h3 TIME
+    #timer-wrap.active-game.center
+      .wrap
+        h2#timer 30
+        h3 TIME
     
     #input-section
+
       .section
         h3.inactive-game.hide YOUR SCORE IS
         input#textfield(type='text', name='textfield', autocorrect='off', autocapitalize='none')
@@ -71,32 +73,32 @@ block content
         .image
           .overlay
   #lower-section
-    .row.center
+    h3.active-game SCORE
+    .row.center#submit-and-results
       .col-xs-12.col-sm-10.col-md-8.col-lg-6
         .row.center
           #thanks-wrap.hide
-            h2 Your score was submitted
+            p Your score was submitted
           #submit-wrap.row.center.inactive-game.hide
-            .col-xs-12.col-sm-6
+            .col-xs-10.col-sm-7
               input#submit-input(placeholder="YOUR NAME")
-            .col-xs-12.col-sm-6 
+            .col-xs-10.col-sm-5 
               .button#submit-button SUBMIT SCORE
 
     #all-images-wrap.inactive-game.row.hide
-      .col-xs-10.col-sm-10.col-md-8.col-md-6.col-lg-5(style="margin: 0 auto;")
+      .col-xs-10.col-sm-10.col-md-8.col-md-6(style="margin: 0 auto;")
         #all-images.row.center
 
     #load-more-button-wrap.inactive-game.hide
       span#load-more-button LOAD MORE
 
-    h3.active-game SCORE
     #instructions.row.center.active-game
-      p.col-xs-12.col-md-8.col-lg-6 Start by writing the name of a band or a musician and press <b>enter</b>. Then write another name starting with the last letter of the one before.
+      p.col-xs-12.col.col-sm-8.col-md-7.col-lg-5 Start by writing the name of a band or a musician and press <b>enter</b>. Then write another name starting with the last letter of the one before.
 
     #highscore-wrap.row.center-xs.active-game
-      #highscore-container.col-xs-12.col.col-sm-11.col-md-9.col-lg-7
+      #highscore-container.col-xs-12.col-sm-8.col-md-7.col-lg-5
         .row.center
-          #highscores.col-xs-12.col-sm-10.col-md-8.col-lg-6
+          #highscores.col-xs-12.col-sm-10.col-md-8.col-lg-8
             h3 HIGH SCORES
 
     script#highscore-row(type='x-tmpl-mustache').

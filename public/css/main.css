@@ -1,6 +1,3 @@
-body {
-  overflow-x: hidden; }
-
 .center, body #upper-section #image-carousel .image-wrap.has-content .overlay {
   display: -webkit-flex;
   display: flex;
@@ -15,9 +12,10 @@ body {
   display: none !important; }
 
 .button {
-  padding: 5px 0px;
+  padding: 10px 0px;
   background: #68b3ca;
   color: white;
+  letter-spacing: 1px;
   border: 1px solid #68b3ca; }
   .button:hover {
     cursor: pointer; }
@@ -27,65 +25,73 @@ body {
   margin: 0;
   font-family: "canada-type-gibson", sans-serif;
   color: #4c4c4c;
-  font-weight: 100;
-  text-align: center; }
+  font-weight: 400;
+  text-align: center;
+  overflow-x: hidden; }
   body h2 {
-    font-size: 2rem; }
+    font-size: 4rem;
+    color: #232323; }
   body h3 {
-    font-size: 1rem;
-    font-weight: 100; }
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 2px; }
   body #upper-section {
     text-align: center; }
+    body #upper-section .wrap {
+      padding: 50px 0px 45px 0px; }
     body #upper-section #timer-wrap {
       text-align: center;
       width: 100%; }
       body #upper-section #timer-wrap #timer {
         font-weight: 500;
         margin: 0px 0px 0px 0px;
-        padding: 0px;
-        font-size: 40px; }
+        padding: 0px; }
       body #upper-section #timer-wrap h3 {
         margin: 0px 0px 0px 0px;
         padding: 0px 0px 0px 0px; }
     body #upper-section #input-section {
       background: #fff; }
+      body #upper-section #input-section .section {
+        padding: 35px 0; }
       body #upper-section #input-section input {
         width: 100%;
         -webkit-appearance: textfield;
         text-align: center;
         background-color: white;
         cursor: auto;
+        color: #232323;
         padding: 5px 0 5px 0px;
         border-width: 0px;
         border-style: inset;
         border-color: #fff;
-        font-size: 40px;
+        font-size: 3.5rem;
         font-weight: 800; }
         body #upper-section #input-section input:focus {
           outline: 0; }
-    body #upper-section #image-carousel .image-wrap .image {
-      background-color: white;
-      height: 100%;
-      height: 100px;
-      width: 100px;
-      background-position: center;
-      background-size: cover;
-      margin: 0 auto;
-      border: 1px solid #b1b2b1;
-      position: relative; }
-    body #upper-section #image-carousel .image-wrap.inactive .image {
-      border: 1px solid #cfd6d7;
-      background-color: #eff5f8; }
-    body #upper-section #image-carousel .image-wrap.has-content .overlay {
-      position: absolute;
-      display: flex;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5); }
-      body #upper-section #image-carousel .image-wrap.has-content .overlay span {
-        color: #fff;
-        font-weight: 600;
-        font-size: 1.5em; }
+    body #upper-section #image-carousel {
+      margin: 20px 0px 0px 0px; }
+      body #upper-section #image-carousel .image-wrap .image {
+        background-color: white;
+        height: 100px;
+        width: 100px;
+        background-position: center;
+        background-size: cover;
+        margin: 0 auto;
+        border: 1px solid #b1b2b1;
+        position: relative; }
+      body #upper-section #image-carousel .image-wrap.inactive .image {
+        border: 1px solid #cfd6d7;
+        background-color: #eff5f8; }
+      body #upper-section #image-carousel .image-wrap.has-content .overlay {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); }
+        body #upper-section #image-carousel .image-wrap.has-content .overlay span {
+          color: #fff;
+          font-weight: 600;
+          font-size: 1.5em; }
 
 @media screen and (max-width: 480px) {
   .image-wrap.hide-for-small {
@@ -108,42 +114,62 @@ body {
       -ms-user-select: none;
       user-select: none; } }
 #instructions {
+  padding: 2.5rem 1rem; }
+
+#submit-and-results {
+  margin-top: 20px; }
+
+#submit-wrap {
+  width: 100%; }
+  #submit-wrap input {
+    padding: 13px 0px;
+    border: 1px solid #b1b2b1;
+    width: 100%;
+    text-indent: 15px; }
+  #submit-wrap .button {
+    width: 100%; }
+    @media screen and (max-width: 480px) {
+      #submit-wrap .button {
+        margin-top: 10px; } }
+
+#replay-button {
+  margin: 75px 0px;
+  font-weight: 800; }
+
+#highscore-wrap {
   padding-bottom: 3rem; }
-
-#submit-wrap input {
-  padding: 5px 0px;
-  border: 1px solid #b1b2b1;
-  width: 100%; }
-#submit-wrap .button {
-  width: 100%; }
-
-#highscore-wrap #highscore-container {
-  border-bottom: 1px solid #b1b2b1;
-  border-top: 1px solid #b1b2b1; }
-#highscore-wrap #highscores {
-  padding-bottom: 2rem; }
-  #highscore-wrap #highscores .row {
-    padding: 0 5px;
-    margin: 0 auto;
-    background: #ebf2f5; }
-    #highscore-wrap #highscores .row:nth-child(even) {
-      background: white; }
-    #highscore-wrap #highscores .row .index {
-      flex-basis: 10%;
-      text-align: left;
-      font-weight: 500; }
-    #highscore-wrap #highscores .row .name {
-      flex-basis: 50%;
-      text-align: left; }
-    #highscore-wrap #highscores .row .score {
-      flex-basis: 40%;
-      text-align: right; }
+  #highscore-wrap #highscore-container {
+    border-bottom: 1px solid #b1b2b1;
+    border-top: 1px solid #b1b2b1; }
+  #highscore-wrap #highscores {
+    padding-bottom: 2rem;
+    padding: 20px 20px; }
+    #highscore-wrap #highscores h3 {
+      font-size: 0.7rem; }
+    #highscore-wrap #highscores .row {
+      padding: 5px;
+      margin: 0 auto;
+      background: #ebf2f5; }
+      #highscore-wrap #highscores .row:nth-child(even) {
+        background: white; }
+      #highscore-wrap #highscores .row .index {
+        flex-basis: 10%;
+        text-align: left;
+        font-weight: 600; }
+      #highscore-wrap #highscores .row .name {
+        flex-basis: 50%;
+        text-align: left;
+        font-weight: 400; }
+      #highscore-wrap #highscores .row .score {
+        flex-basis: 40%;
+        text-align: right;
+        font-weight: 400; }
 
 #all-images-wrap {
-  max-height: 20rem;
   overflow: hidden;
   border-bottom: 1px solid #b1b2b1;
-  padding-bottom: 1rem; }
+  padding-bottom: 1rem;
+  max-height: 25vh; }
   #all-images-wrap.show-all {
     max-height: none; }
   #all-images-wrap #all-images .image-wrap div {

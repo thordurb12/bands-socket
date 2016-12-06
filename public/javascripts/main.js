@@ -85,7 +85,7 @@ $(function() {
     var numberOfImages = $('.has-content').length;
     addToImageWall(image)
     if(score <= 9) {
-      score = "00" + score;
+      score = "0" + score;
     } else if (score <= 99){
       score = "0" + score;
     }
@@ -101,6 +101,9 @@ $(function() {
     textfield.val(score);
     textfield.disabled = true
     textfield.blur();
+
+    $('#input-section section').addClass('')
+
     var request = $.get('/api/ranking?score='+score , function(res) {
       var ranking = parseInt(res.count) + 1;
       $('#world-ranking').html('YOU RANK NO. <b>'+ ranking + '</b> WORLDWIDE');
@@ -123,6 +126,7 @@ $(function() {
     $('#all-images').html('');
     $('#all-images-wrap').removeClass('show-all')
     textfield.disabled = false
+    textfield.val('')
     images = []
     score = 0
   }
@@ -216,8 +220,6 @@ function renderHighscore(list) {
       var entry = list[key]
       var entryIndex = index;
       if(entryIndex <= 9) {
-        entryIndex = "00" + entryIndex;
-      } else if (score <= 99){
         entryIndex = "0" + entryIndex;
       }
       var rendered = Mustache.render(template, {index: entryIndex, name: entry.name, score: entry.score});
@@ -231,7 +233,7 @@ function displayImages () {
   _.each(images, function(image) {
     var div = document.createElement('div');
     div.style.backgroundImage = "url("+image.src+")";
-    target.append('<div class="image-wrap col-xs-12 col-sm-4 col-md-3 col-lg-2"</div>');
+    target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-2"</div>');
     $('.image-wrap').last().html(div);
 
   });
