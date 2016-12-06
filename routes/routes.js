@@ -67,7 +67,7 @@ router.get('/api/ranking', (req, res, next) => {
         console.log(err);
       }
 
-      const query = client.query('select COUNT(*) from highscores where score > ($1);',
+      const query = client.query('select COUNT(*) from highscores where score > ($1) LIMIT 20;',
       [data.score]);
 
       query.on('row', (row) => {
