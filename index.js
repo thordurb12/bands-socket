@@ -66,7 +66,7 @@ io.on('connection', function(socket){
 
   var score = 0;
   const request = require('request-promise')
-  var INITTIME = 30;
+  var INITTIME = 4;
   var MAXTIME = 30;
   var time = INITTIME;
   var timeElapsed = 0;

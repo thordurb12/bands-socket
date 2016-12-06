@@ -50,9 +50,8 @@ body {
         margin: 0px 0px 0px 0px;
         padding: 0px 0px 0px 0px; }
     body #upper-section #input-section {
-      background: #fff; }
-      body #upper-section #input-section .section {
-        padding: 35px 0; }
+      background: #fff;
+      height: 175px; }
       body #upper-section #input-section input {
         width: 100%;
         -webkit-appearance: textfield;
@@ -175,6 +174,7 @@ body {
   #all-images-wrap #all-images .image-wrap div {
     width: 100%;
     padding-top: 100%;
+    background-color: white;
     background-size: cover;
     background-position: center;
     margin-top: 1rem; }

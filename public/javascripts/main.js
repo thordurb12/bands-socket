@@ -233,10 +233,17 @@ function displayImages () {
   _.each(images, function(image) {
     var div = document.createElement('div');
     div.style.backgroundImage = "url("+image.src+")";
-    target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-2"</div>');
+    target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>');
     $('.image-wrap').last().html(div);
 
   });
+
+  var numPlaceHolders = Math.max(8 - images.length, 0);
+
+  for(var i = 0; i < numPlaceHolders; i++) {
+      target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"><div class="placeholder"></div></div>');
+  }
+
 }
 
 function focusTextField() {

@@ -27,8 +27,7 @@ block content
         h2#timer 30
         h3 TIME
     
-    #input-section
-
+    #input-section.center
       .section
         h3.inactive-game.hide YOUR SCORE IS
         input#textfield(type='text', name='textfield', autocorrect='off', autocapitalize='none')
@@ -75,7 +74,7 @@ block content
   #lower-section
     h3.active-game SCORE
     .row.center#submit-and-results
-      .col-xs-12.col-sm-10.col-md-8.col-lg-6
+      .col-xs-12.col-sm-10.col-md-8.col-lg-4
         .row.center
           #thanks-wrap.hide
             p Your score was submitted
@@ -86,7 +85,7 @@ block content
               .button#submit-button SUBMIT SCORE
 
     #all-images-wrap.inactive-game.row.hide
-      .col-xs-10.col-sm-10.col-md-8.col-md-6(style="margin: 0 auto;")
+      .col-xs-10.col-sm-10.col-md-8.col-lg-5(style="margin: 0 auto;")
         #all-images.row.center
 
     #load-more-button-wrap.inactive-game.hide
