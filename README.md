@@ -1,11 +1,9 @@
+
 # bands
 
 TO RUN:
 
 To run:
-
-Run database server:
-'redis-server'
 
 Run app:
 node app.js
