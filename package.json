@@ -6,6 +6,9 @@
     "build-css": "node-sass --include-path sass sass/main.sass   public/css/main.css",
     "watch-css": "nodemon -e sass -x \"npm run build-css\""
   },
+  "scripts": {
+      "start": "node your-script.js"
+  },
   "dependencies": {
     "body-parser": "^1.15.2",
     "cookie-parser": "~1.4.3",
@@ -24,3 +27,5 @@
     "nodemon": "^1.11.0"
   }
 }
+
+
