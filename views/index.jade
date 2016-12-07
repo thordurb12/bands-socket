@@ -20,7 +20,8 @@ block content
     
     #replay-section.inactive-game.hide.row.center
       .col-xs-10.col-sm-5.col-md-2.col-lg-2
-        .button#replay-button PLAY AGAIN
+        .button#replay-button 
+          a(href="/") PLAY AGAIN
 
     #timer-wrap.active-game.center
       .wrap
@@ -83,6 +84,16 @@ block content
               input#submit-input(placeholder="YOUR NAME")
             .col-xs-10.col-sm-5 
               .button#submit-button SUBMIT SCORE
+
+    #share-wrap.inactive-game.hide
+      h3 SHARE
+      .row.center
+        .col-xs-6.col-md-2.col-lg-1.center.twitter
+          a(target="_blank")
+            img(src="/images/twitter.svg")
+        .col-xs-6.col-md-2.col-lg-1.center
+          a.facebook
+            img(src="/images/facebook.svg")
 
     #all-images-wrap.inactive-game.row.hide
       .col-xs-10.col-sm-10.col-md-8.col-lg-5(style="margin: 0 auto;")

@@ -20,6 +20,10 @@
   .button:hover {
     cursor: pointer; }
 
+a {
+  color: #fff;
+  text-decoration: none; }
+
 body {
   background: #ebf2f5;
   margin: 0;
@@ -117,7 +121,7 @@ body {
   padding: 2.5rem 1rem; }
 
 #submit-and-results {
-  margin-top: 20px; }
+  margin: 20px 0px; }
 
 #submit-wrap {
   width: 100%; }
@@ -165,6 +169,13 @@ body {
         text-align: right;
         font-weight: 400; }
 
+#share-wrap {
+  margin: 20px 0px 0px 0px; }
+  #share-wrap .facebook {
+    cursor: pointer; }
+  #share-wrap img {
+    width: 4em; }
+
 #all-images-wrap {
   overflow: hidden;
   border-bottom: 1px solid #b1b2b1;
@@ -172,13 +183,15 @@ body {
   max-height: 25vh; }
   #all-images-wrap.show-all {
     max-height: none; }
-  #all-images-wrap #all-images .image-wrap div {
-    width: 100%;
-    padding-top: 100%;
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-    margin-top: 1rem; }
+  #all-images-wrap #all-images .image-wrap {
+    margin-bottom: 1em; }
+    #all-images-wrap #all-images .image-wrap div {
+      width: 100%;
+      padding-top: 100%;
+      background-color: white;
+      background-size: cover;
+      background-position: center;
+      margin-top: 1rem; }
 
 #load-more-button-wrap {
   text-align: center; }

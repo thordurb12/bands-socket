@@ -103,6 +103,8 @@ $(function() {
     textfield.disabled = true
     textfield.blur();
 
+    $('.twitter a').attr('href','https://twitter.com/intent/tweet?text=I%20could%20name%20'+ score +'%20bands%20on%20http://bands.staf.li/')
+
     $('#input-section section').addClass('')
 
     var request = $.get('/api/ranking?score='+score , function(res) {
@@ -157,7 +159,7 @@ $(function() {
   })
 
   $('#replay-button').click(function(e) {
-    playAgain();
+    // playAgain();
   })
 
   $('#textfield').keydown(function (e) {
@@ -182,7 +184,7 @@ $(function() {
       link: window.location.href,
       href: window.location.href,
       image: 'http://bands.staf.li/public/images/fb.jpg',
-      description: 'I got to ' + currentStreak
+      description: 'I got ' + score
           },
         function(response) {
           //do noting
@@ -229,20 +231,19 @@ function renderHighscore(list) {
     }
 }
 
+function checkOverflow(el) {
+ var curOverflow = el.style.overflow;
 
-  function checkOverflow(el) {
-   var curOverflow = el.style.overflow;
+ if ( !curOverflow || curOverflow === "visible" )
+    el.style.overflow = "hidden";
 
-   if ( !curOverflow || curOverflow === "visible" )
-      el.style.overflow = "hidden";
+ var isOverflowing = el.clientWidth < el.scrollWidth 
+    || el.clientHeight < el.scrollHeight;
 
-   var isOverflowing = el.clientWidth < el.scrollWidth 
-      || el.clientHeight < el.scrollHeight;
+ el.style.overflow = curOverflow;
 
-   el.style.overflow = curOverflow;
-
-   return isOverflowing;
-  }
+ return isOverflowing;
+}
 
 function displayImages () {
   var target = $('#all-images')
@@ -265,7 +266,6 @@ function displayImages () {
   if(!isOverflowing || images.length < 4) {
     $('#load-more-button').addClass('hide');
   }
-
 }
 
 function showAllImages() {

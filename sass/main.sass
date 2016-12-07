@@ -34,6 +34,10 @@ $break-large: 1024px
   &:hover
     cursor: pointer
 
+a
+  color: #fff
+  text-decoration: none
+
 body
   background: $blue
   // background-image: url("../images/NameTheBand_01.png")
@@ -144,7 +148,7 @@ body
   padding: 2.5rem 1rem
 
 #submit-and-results
-  margin-top: 20px
+  margin: 20px 0px
 
 #submit-wrap
   width: 100%
@@ -192,6 +196,13 @@ body
         text-align: right
         font-weight: 400
 
+#share-wrap
+  margin: 20px 0px 0px 0px
+  .facebook
+    cursor: pointer
+  img
+    width: 4em
+
 #all-images-wrap
   overflow: hidden
   border-bottom: 1px solid $border-color
@@ -200,7 +211,8 @@ body
   &.show-all
     max-height: none
   #all-images
-    .image-wrap 
+    .image-wrap
+      margin-bottom: 1em
       div
         width: 100%
         padding-top: 100%
