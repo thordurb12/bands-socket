@@ -155,6 +155,11 @@ io.on('connection', function(socket){
       // Grab data from http request
       const data = {name: name, score: score};
       // Get a Postgres client from the connection pool
+
+      if(name.length > 40) {
+        return null
+      }
+
       pg.connect(connectionString, (err, client, done) => {
         // Handle connection errors
         if(err) {
