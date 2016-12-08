@@ -46,8 +46,7 @@ body {
       padding: 50px 0px 45px 0px; }
     body #upper-section #timer-wrap, body #upper-section #replay-section {
       height: 180px;
-      text-align: center;
-      width: 100%; }
+      text-align: center; }
       body #upper-section #timer-wrap #timer, body #upper-section #replay-section #timer {
         font-weight: 500;
         margin: 0px 0px 0px 0px;
