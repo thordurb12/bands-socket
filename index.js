@@ -64,8 +64,8 @@ io.on('connection', function(socket){
 
   var score = 0;
   const request = require('request-promise')
-  var INITTIME = 4;
-  var MAXTIME = 30;
+  var INITTIME = 30;
+  var MAXTIME = 60;
   var time = INITTIME;
   var timeElapsed = 0;
   var rightAnswers = [];
@@ -165,7 +165,7 @@ io.on('connection', function(socket){
         client.query('INSERT INTO highscores(name, score) values($1, $2)',
         [data.name, data.score]);
         // SQL Query > Select Data
-        const query = client.query('SELECT * FROM items ORDER BY id ASC');
+        const query = client.query('SELECT * FROM highscores ORDER BY id ASC');
         // Stream results back one row at a time
         query.on('row', (row) => {
           results.push(row);
