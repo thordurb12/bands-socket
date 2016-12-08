@@ -11,8 +11,8 @@ var routes = require('./routes/routes');
 const connectionString = process.env.DATABASE_URL || 'postgres://sdzylqidfjunid:FLDP-SOZg43cpRY-s3wwRTn137@ec2-46-137-97-169.eu-west-1.compute.amazonaws.com:5432/d5cquq4ebk7477';
 const pg = require('pg');
 
-http.listen(8080, function(){
-  console.log('listening on *:8080');
+http.listen(3000, function(){
+  console.log('listening on *:3000');
 });
 
 // view engine setup
