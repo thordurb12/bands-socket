@@ -1,5 +1,5 @@
 const pg = require('pg');
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/bands';
+const connectionString = process.env.DATABASE_URL || 'postgres://sdzylqidfjunid:FLDP-SOZg43cpRY-s3wwRTn137@ec2-46-137-97-169.eu-west-1.compute.amazonaws.com:5432/d5cquq4ebk7477';
 
 const client = new pg.Client(connectionString);
 client.connect();
