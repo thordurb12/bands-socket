@@ -6,7 +6,6 @@ var io = require('socket.io').listen(http);
 var _ = require("underscore");
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var sass = require('node-sass');
 var routes = require('./routes/routes');
 const connectionString = process.env.DATABASE_URL || 'postgres://sdzylqidfjunid:FLDP-SOZg43cpRY-s3wwRTn137@ec2-46-137-97-169.eu-west-1.compute.amazonaws.com:5432/d5cquq4ebk7477';
 const pg = require('pg');
