@@ -24,6 +24,10 @@ a {
   color: #fff;
   text-decoration: none; }
 
+html {
+  overflow-x: hidden;
+  width: 100vw; }
+
 body {
   background: #ebf2f5;
   overflow-x: hidden;
