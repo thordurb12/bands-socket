@@ -2,10 +2,10 @@
   "name": "bands",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "build-css": "node-sass --include-path sass sass/main.sass   public/css/main.css",
-    "watch-css": "nodemon -e sass -x \"npm run build-css\""
-  },
+  // "scripts": {
+  //   "build-css": "node-sass --include-path sass sass/main.sass   public/css/main.css",
+  //   "watch-css": "nodemon -e sass -x \"npm run build-css\""
+  // },
   "scripts": {
       "start": "node index.js"
   },
