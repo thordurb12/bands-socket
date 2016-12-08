@@ -26,6 +26,7 @@ a {
 
 body {
   background: #ebf2f5;
+  overflow-x: hidden;
   margin: 0;
   font-family: "canada-type-gibson", sans-serif;
   color: #4c4c4c;
