@@ -90,8 +90,11 @@ $(function() {
     } else if (score <= 99){
       score = "0" + score;
     }
-
-    $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"><div class="overlay"><span>' + score + '</div></div></div>',5+numberOfImages, true);
+    if(image != null) {
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"><div class="overlay"><span>' + score + '</div></div></div>',5+numberOfImages, true);
+    } else {
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image"><div class="overlay"><span>' + score + '</div></div></div>',5+numberOfImages, true);
+    }
     $('#image-carousel:last-child').slickNext()
   }
 
