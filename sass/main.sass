@@ -5,8 +5,8 @@ $border-color: rgb(177,178,177)
 $lighter-border-color: rgb(207,214,215)
 $blue:  #ebf2f5
 $font-color: rgb(76,76,76)
-$button-blue: rgb(104,179,202)
-$button-border: rgb(104,179,202)
+$button-blue: #7cc1d4
+$button-border: rgb(111,174,193)
 
 $break-small: 480px
 $break-medium: 600px
@@ -46,7 +46,7 @@ body
   background: $blue
   overflow-x: hidden
   width: 100vw
-  // background-image: url("../images/NameTheBand_01.png")
+  // background-image: url("../images/NameTheBand_02.png")
   // background-repeat: no-repeat
 
   margin: 0
@@ -70,7 +70,7 @@ body
     .wrap
       padding: 50px 0px 45px 0px
     #timer-wrap, #replay-section
-      height: 180px
+      height: 180px    
       text-align: center
       #timer
         font-weight: 500
@@ -91,12 +91,13 @@ body
         background-color: white
         cursor: auto
         color: $black
-        padding: 5px 0 5px 0px
         border-width: 0px
         border-style: inset
         border-color: #fff
         font-size: 3.5rem
         font-weight: 800
+        padding: 0px
+        letter-spacing: 2px
         &:focus
           outline: 0
 
@@ -132,6 +133,13 @@ body
 @media screen and (max-width: $break-small)
   .image-wrap.hide-for-small
     display: none !important
+  #timer-wrap, #replay-section
+    height: 115px !important
+  #upper-section #input-section
+    height: 130px !important
+  #instructions 
+    padding: 0px !important
+    
 @media screen and (max-width: $break-medium) 
   .image-wrap.hide-for-medium
     display: none !important
@@ -169,6 +177,9 @@ body
 
 #replay-button
   margin: 75px 0px
+  font-size: 20px
+  letter-spacing: 2px
+  width: 185px 
   font-weight: 800
 
 #highscore-wrap
@@ -206,7 +217,8 @@ body
   .facebook
     cursor: pointer
   img
-    width: 4em
+    width: 28px
+    margin: 0 8px
 
 #all-images-wrap
   overflow: hidden
@@ -215,6 +227,7 @@ body
   max-height: 25vh
   &.show-all
     max-height: none
+    border-bottom: none
   #all-images
     .image-wrap
       margin-bottom: 1em
@@ -225,6 +238,7 @@ body
         background-size: cover
         background-position: center
         margin-top: 1rem
+        border: 1px solid $border-color
 
 #load-more-button-wrap
   text-align: center

@@ -7,7 +7,7 @@ var _ = require("underscore");
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var routes = require('./routes/routes');
-const connectionString = process.env.DATABASE_URL || 'postgres://sdzylqidfjunid:FLDP-SOZg43cpRY-s3wwRTn137@ec2-46-137-97-169.eu-west-1.compute.amazonaws.com:5432/d5cquq4ebk7477';
+const connectionString = 'postgres://localhost:5432/bands' || 'postgres://sdzylqidfjunid:FLDP-SOZg43cpRY-s3wwRTn137@ec2-46-137-97-169.eu-west-1.compute.amazonaws.com:5432/d5cquq4ebk7477';
 const pg = require('pg');
 
 http.listen(process.env.PORT || 3000, function(){
@@ -64,7 +64,7 @@ io.on('connection', function(socket){
 
   var score = 0;
   const request = require('request-promise')
-  var INITTIME = 30;
+  var INITTIME = 2;
   var MAXTIME = 60;
   var time = INITTIME;
   var timeElapsed = 0;

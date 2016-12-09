@@ -13,10 +13,10 @@
 
 .button {
   padding: 10px 0px;
-  background: #68b3ca;
+  background: #7cc1d4;
   color: white;
   letter-spacing: 1px;
-  border: 1px solid #68b3ca; }
+  border: 1px solid #6faec1; }
   .button:hover {
     cursor: pointer; }
 
@@ -69,12 +69,13 @@ body {
         background-color: white;
         cursor: auto;
         color: #232323;
-        padding: 5px 0 5px 0px;
         border-width: 0px;
         border-style: inset;
         border-color: #fff;
         font-size: 3.5rem;
-        font-weight: 800; }
+        font-weight: 800;
+        padding: 0px;
+        letter-spacing: 2px; }
         body #upper-section #input-section input:focus {
           outline: 0; }
     body #upper-section #image-carousel {
@@ -104,7 +105,16 @@ body {
 
 @media screen and (max-width: 480px) {
   .image-wrap.hide-for-small {
-    display: none !important; } }
+    display: none !important; }
+
+  #timer-wrap, #replay-section {
+    height: 115px !important; }
+
+  #upper-section #input-section {
+    height: 130px !important; }
+
+  #instructions {
+    padding: 0px !important; } }
 @media screen and (max-width: 600px) {
   .image-wrap.hide-for-medium {
     display: none !important; } }
@@ -143,6 +153,9 @@ body {
 
 #replay-button {
   margin: 75px 0px;
+  font-size: 20px;
+  letter-spacing: 2px;
+  width: 185px;
   font-weight: 800; }
 
 #highscore-wrap {
@@ -179,7 +192,8 @@ body {
   #share-wrap .facebook {
     cursor: pointer; }
   #share-wrap img {
-    width: 4em; }
+    width: 28px;
+    margin: 0 8px; }
 
 #all-images-wrap {
   overflow: hidden;
@@ -187,7 +201,8 @@ body {
   padding-bottom: 1rem;
   max-height: 25vh; }
   #all-images-wrap.show-all {
-    max-height: none; }
+    max-height: none;
+    border-bottom: none; }
   #all-images-wrap #all-images .image-wrap {
     margin-bottom: 1em; }
     #all-images-wrap #all-images .image-wrap div {
@@ -196,7 +211,8 @@ body {
       background-color: white;
       background-size: cover;
       background-position: center;
-      margin-top: 1rem; }
+      margin-top: 1rem;
+      border: 1px solid #b1b2b1; }
 
 #load-more-button-wrap {
   text-align: center; }

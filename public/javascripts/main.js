@@ -268,6 +268,7 @@ function displayImages () {
   
   if(!isOverflowing || images.length < 4) {
     $('#load-more-button').addClass('hide');
+    $('#all-images-wrap').addClass('show-all');
   }
 }
 
