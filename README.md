@@ -3,7 +3,9 @@
 
 TO RUN:
 
-To run:
+Setup database:
+talk to thordur
+node databse.js
 
 Run app:
 node index.js
