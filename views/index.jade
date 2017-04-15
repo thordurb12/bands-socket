@@ -74,27 +74,26 @@ block content
           .overlay
   #lower-section
     h3.active-game SCORE
-
-    .submit-share-wrap
-      .row.center#submit-and-results
-        .col-xs-12.col-sm-6.col-md-4.col-lg-4
-          .row.center
-            #thanks-wrap.hide
-              p Your score was submitted
-            #submit-wrap.row.center.inactive-game.hide
-              .col-xs-10.col-sm-7
-                input#submit-input(placeholder="YOUR NAME")
-              .col-xs-10.col-sm-5 
-                .button#submit-button SUBMIT SCORE
-
-      #share-wrap.inactive-game.hide
-        h3 SHARE
+    
+    .row.center#submit-and-results
+      .col-xs-12.col-sm-6.col-md-4.col-lg-4
         .row.center
-          .col-xs-6.col-md-2.col-lg-1.center.twitter
-            a(target="_blank")
-              img.float-left(src="/images/twitter.svg")
-            a.facebook
-              img.float-left(src="/images/facebook.svg")
+          #thanks-wrap.hide
+            p Your score was submitted
+          #submit-wrap.row.center.inactive-game.hide
+            .col-xs-10.col-sm-7
+              input#submit-input(placeholder="YOUR NAME")
+            .col-xs-10.col-sm-5 
+              .button#submit-button SUBMIT SCORE
+
+    #share-wrap.inactive-game.hide
+      h3 SHARE
+      .row.center
+        .col-xs-6.col-md-2.col-lg-1.center.twitter
+          a(target="_blank")
+            img.float-left(src="/images/twitter.svg")
+          a.facebook
+            img.float-left(src="/images/facebook.svg")
 
     #all-images-wrap.inactive-game.row.hide
       .col-xs-10.col-sm-10.col-md-8.col-lg-5(style="margin: 0 auto;")
