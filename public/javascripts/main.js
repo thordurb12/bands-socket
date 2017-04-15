@@ -28,7 +28,7 @@ $(function() {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          initialSlide: 6      
+          initialSlide: 6
         }
       },
       {
@@ -41,7 +41,7 @@ $(function() {
       }
     ]
   });
-  
+
   showHighscores()
 
   var socket = io();
@@ -56,7 +56,7 @@ $(function() {
 
   socket.on('gameOver',function(score){
     console.log('gameOver')
-      
+
     gameOver(score);
   });
 
@@ -144,7 +144,7 @@ $(function() {
   function submitHighscore(name) {
     socket.emit('submitHighscore', name);
   }
-  
+
   socket.on('highscorecSubmitted', function() {
     $('#submit-wrap').addClass('hide');
     $('#thanks-wrap').removeClass('hide');
@@ -156,13 +156,13 @@ $(function() {
       submitHighscore(name)
     }
   })
-  
+
   $('#load-more-button').click(function(e) {
     showAllImages()
   })
 
   $('#replay-button').click(function(e) {
-    // playAgain();
+    playAgain();
   })
 
   $('#textfield').keydown(function (e) {
@@ -240,7 +240,7 @@ function checkOverflow(el) {
  if ( !curOverflow || curOverflow === "visible" )
     el.style.overflow = "hidden";
 
- var isOverflowing = el.clientWidth < el.scrollWidth 
+ var isOverflowing = el.clientWidth < el.scrollWidth
     || el.clientHeight < el.scrollHeight;
 
  el.style.overflow = curOverflow;
@@ -265,7 +265,7 @@ function displayImages () {
   }
 
   var isOverflowing = checkOverflow(document.getElementById('all-images-wrap'))
-  
+
   if(!isOverflowing || images.length < 4) {
     $('#load-more-button').addClass('hide');
     $('#all-images-wrap').addClass('show-all');
@@ -275,7 +275,7 @@ function displayImages () {
 function showAllImages() {
   var target = $('#all-images-wrap');
   target.addClass('show-all');
-  $('#load-more-button').addClass('hide');  
+  $('#load-more-button').addClass('hide');
 }
 
 function focusTextField() {
