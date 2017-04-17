@@ -121,6 +121,11 @@ $(function() {
     displayImages();
   }
 
+  function removeInitialScreen() {
+    $('#init-wrap').hide();
+    focusTextField();
+  }
+
   function playAgain() {
     var textfield = $('#textfield')
     $('.has-content').remove();
@@ -159,6 +164,10 @@ $(function() {
 
   $('#load-more-button').click(function(e) {
     showAllImages()
+  })
+
+  $('#play-button').click(function(e) {
+    removeInitialScreen();
   })
 
   $('#replay-button').click(function(e) {
@@ -230,7 +239,7 @@ function renderHighscore(list) {
       }
       var rendered = Mustache.render(template, {index: entryIndex, name: entry.name, score: entry.score});
       index++;
-      $('#highscores').append(rendered);
+      $('.highscores').append(rendered);
     }
 }
 

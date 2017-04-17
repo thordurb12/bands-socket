@@ -46,8 +46,6 @@ body
   background: $blue
   overflow-x: hidden
   width: 100vw
-  // background-image: url("../images/NameTheBand_02.png")
-  // background-repeat: no-repeat
 
   margin: 0
   font-family: "canada-type-gibson" ,sans-serif
@@ -55,7 +53,7 @@ body
   font-weight: 400
   text-align: center
   overflow-x: hidden
-  
+
   h2
     font-size: 4rem
     color: $black
@@ -65,12 +63,28 @@ body
     font-weight: 400
     letter-spacing: 2px
 
+  #init-wrap
+    z-index: 10000
+    position: fixed
+    height: 100%
+    width: 100%
+    background: $blue
+    .random-rectangle
+      background: $gray
+      padding-top: 100%
+      margin-top: 15%
+      margin-bottom: 15%
+      width: 100%
+      background-repeat: no-repeat
+      background-size: cover
+      background-position: center
+
   #upper-section
     text-align: center
     .wrap
       padding: 50px 0px 45px 0px
     #timer-wrap, #replay-section
-      height: 180px    
+      height: 180px
       text-align: center
       #timer
         font-weight: 500
@@ -137,13 +151,13 @@ body
     height: 115px !important
   #upper-section #input-section
     height: 130px !important
-  #instructions 
+  #instructions
     padding: 0px !important
-    
-@media screen and (max-width: $break-medium) 
+
+@media screen and (max-width: $break-medium)
   .image-wrap.hide-for-medium
     display: none !important
-@media screen and (max-width: $break-large) 
+@media screen and (max-width: $break-large)
   .image-wrap.hide-for-large
     display: none !important
   .section
@@ -179,7 +193,7 @@ body
   margin: 75px 0px
   font-size: 20px
   letter-spacing: 2px
-  width: 185px 
+  width: 185px
   font-weight: 800
 
 #highscore-wrap
@@ -188,7 +202,7 @@ body
     border-bottom: 1px solid $border-color
     border-top: 1px solid $border-color
 
-  #highscores
+  .highscores
     padding-bottom: 2rem
     padding: 20px 20px
     h3
@@ -242,6 +256,6 @@ body
 
 #load-more-button-wrap
   text-align: center
-  span 
+  span
     &:hover
       cursor: pointer

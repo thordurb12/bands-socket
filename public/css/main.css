@@ -45,6 +45,21 @@ body {
     font-size: 0.6rem;
     font-weight: 400;
     letter-spacing: 2px; }
+  body #init-wrap {
+    z-index: 10000;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #ebf2f5; }
+    body #init-wrap .random-rectangle {
+      background: #eff5f8;
+      padding-top: 100%;
+      margin-top: 15%;
+      margin-bottom: 15%;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center; }
   body #upper-section {
     text-align: center; }
     body #upper-section .wrap {
@@ -163,26 +178,26 @@ body {
   #highscore-wrap #highscore-container {
     border-bottom: 1px solid #b1b2b1;
     border-top: 1px solid #b1b2b1; }
-  #highscore-wrap #highscores {
+  #highscore-wrap .highscores {
     padding-bottom: 2rem;
     padding: 20px 20px; }
-    #highscore-wrap #highscores h3 {
+    #highscore-wrap .highscores h3 {
       font-size: 0.7rem; }
-    #highscore-wrap #highscores .row {
+    #highscore-wrap .highscores .row {
       padding: 5px;
       margin: 0 auto;
       background: #ebf2f5; }
-      #highscore-wrap #highscores .row:nth-child(even) {
+      #highscore-wrap .highscores .row:nth-child(even) {
         background: white; }
-      #highscore-wrap #highscores .row .index {
+      #highscore-wrap .highscores .row .index {
         flex-basis: 10%;
         text-align: left;
         font-weight: 600; }
-      #highscore-wrap #highscores .row .name {
+      #highscore-wrap .highscores .row .name {
         flex-basis: 50%;
         text-align: left;
         font-weight: 400; }
-      #highscore-wrap #highscores .row .score {
+      #highscore-wrap .highscores .row .score {
         flex-basis: 40%;
         text-align: right;
         font-weight: 400; }
