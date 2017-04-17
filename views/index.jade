@@ -86,21 +86,20 @@ block content
        .col-md-4
          .random-rectangle(style='background-image: url("../images/bands/30.jpg")')
     
-       .row
-        .col-xs-12
-         h1 Name the Band
-         p Start by writing the name of a band or a musician and press <b>enter</b>. Then write another name starting with the last letter of the one before.
-           .button#play-button 
-             a PLAY
-         #share-wrap.inactive-game
-           h3 SHARE
-           .row.center
-             .col-xs-6.col-md-2.col-lg-1.center.twitter
-               a(target="_blank")
-                 img.float-left(src="/images/twitter.svg")
-               a.facebook
-                 img.float-left(src="/images/facebook.svg")
-                 
+      .col-xs-12
+       h1 Name the Band
+       p Start by writing the name of a band or a musician and press <b>enter</b>. Then write another name starting with the last letter of the one before.
+         .button#play-button 
+           a PLAY
+       #share-wrap.inactive-game
+         h3 SHARE
+         .row.center
+           .col-xs-6.col-md-2.col-lg-1.center.twitter
+             a(target="_blank", href="https://twitter.com/intent/tweet?text=http://bands.staf.li/")
+               img.float-left(src="/images/twitter.svg")
+             a.facebook
+               img.float-left(src="/images/facebook.svg")
+               
          #highscore-wrap
            #highscore-container.col-xs-12
              .row.center

@@ -51,6 +51,8 @@ body {
     height: 100%;
     width: 100%;
     background: #ebf2f5; }
+    body #init-wrap #highscore-wrap {
+      margin-top: 20px; }
     body #init-wrap .random-rectangle {
       background: #eff5f8;
       padding-top: 100%;
