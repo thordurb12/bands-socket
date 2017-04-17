@@ -122,8 +122,9 @@ $(function() {
   }
 
   function removeInitialScreen() {
-    $('#init-wrap').hide();
-    focusTextField();
+    $('#init-wrap').fadeOut( "slow", function() {
+        focusTextField();
+      });
   }
 
   function playAgain() {
