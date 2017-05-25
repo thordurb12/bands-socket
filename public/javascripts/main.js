@@ -77,11 +77,11 @@ $(function() {
 
   function prepareNextRound(response) {
     $('#textfield').val(response.currentFirstLetter);
-    var artist = response.artists.items[0]
-    addImage(artist.images[0], response.score)
+    var artist = response.artists.items[0];
+    addImage(artist.images[0], response.score, artist.external_urls.spotify);
   }
 
-  function addImage(image,score) {
+  function addImage(image,score, artistUrl) {
     var numberOfImages = $('.has-content').length;
     addToImageWall(image)
 
@@ -91,12 +91,12 @@ $(function() {
       score = "0" + score;
     }
     if(image != null) {
-      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"><div class="overlay"><span>' + score + '</div></div></div>',5+numberOfImages, true);
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"><a href="' + artistUrl +'" class="overlay"><span>' + score + '</a></div></div>',5+numberOfImages, true);
     } else {
       $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image"><div class="overlay"><span>' + score + '</div></div></div>',5+numberOfImages, true);
     }
     $('#image-carousel:last-child').slickNext()
-  }
+  } 
 
   function gameOver(score) {
     $('.inactive-game').removeClass('hide');
