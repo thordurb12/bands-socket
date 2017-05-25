@@ -93,7 +93,7 @@ $(function() {
     if(image != null) {
       $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"><a href="' + artistUrl +'" target="_blank" class="overlay"><span>' + score + '</a></div></div>',5+numberOfImages, true);
     } else {
-      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image"><div class="overlay"><span>' + score + '</div></div></div>',5+numberOfImages, true);
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image"><a href="' + artistUrl +'" target="_blank" class="overlay"><span>' + score + '</a></div></div>',5+numberOfImages, true);
     }
     $('#image-carousel:last-child').slickNext()
   } 

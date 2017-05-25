@@ -54,6 +54,7 @@ body {
     position: fixed;
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
     background: #ebf2f5; }
     body #init-wrap #highscore-wrap {
       margin-top: 20px; }
