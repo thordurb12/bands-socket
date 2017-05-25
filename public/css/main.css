@@ -1,3 +1,7 @@
+@media screen and (max-width: 480px) {
+  .show-for-small-only {
+    display: block; } }
+
 .center, body #upper-section #image-carousel .image-wrap.has-content .overlay {
   display: -webkit-flex;
   display: flex;
