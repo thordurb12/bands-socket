@@ -299,7 +299,7 @@ io.on('connection', function(socket){
   function setNewTime() {
     clearInterval(currentTiming);
     currentTiming = null
-    time = Math.min(MAXTIME, time+5);
+    time = Math.min(MAXTIME, time+10);
     startTimer();
   }
 
