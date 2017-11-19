@@ -212,6 +212,7 @@ io.on('connection', function(socket){
   }
 
   function checkAnswer(response, searchString) {
+    console.log('response: ', response);
     if (compareWordToResponseList(response.artists.items, searchString)){
       if (compareWordToArrayList(rightAnswers, searchString)) {
         return false;
