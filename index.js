@@ -67,7 +67,6 @@ io.on('connection', function(socket){
 
   var client_id = 'a5bf491d67f040c68bb4d7e829cb5a74'; // Your client id
   var client_secret = '49e7e953975a47e284ee0fc61424250d'; // Your secret
-  var options;
 
   // your application requests authorization
   var authOptions = {
@@ -80,22 +79,6 @@ io.on('connection', function(socket){
     },
     json: true
   };
-
-
-  request.post(authOptions, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      // use the access token to access the Spotify Web API
-      var token = body.access_token;
-      options = {
-        uri: "https://api.spotify.com/v1/search?q="+ searchString +"&limit=1&type=artist",
-        headers: {
-          'Authorization': 'Bearer ' + token
-        },
-        json: true
-      };
-    }
-  });
-
   var score = 0;
   var INITTIME = 30;
   var MAXTIME = 60;
@@ -135,20 +118,38 @@ io.on('connection', function(socket){
       }
     }
 
-    request.get(options, function(error, response, body) {
-      console.log(body);
 
-      if(checkAnswer(response, searchString) == true) {
-        addRightAnswerToList(searchString);
-        currentFirstLetter = getLastLetter(searchString);
-        response["currentFirstLetter"] = currentFirstLetter;
-        score++
-        response["score"] = score
-        setNewTime();
-        socket.emit("correctAnswer", response);
-        storeArtistInDatabase(response.artists.items[0])
-      } else {
-        socket.emit("wrongAnswer", response);
+    request.post(authOptions, function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+
+        // use the access token to access the Spotify Web API
+        var token = body.access_token;
+        var options = {
+          uri: "https://api.spotify.com/v1/search?q="+ searchString +"&limit=1&type=artist",
+          headers: {
+            'Authorization': 'Bearer ' + token
+          },
+          json: true
+        };
+
+        request.get(options, function(error, response, body) {
+          console.log(body);
+
+          if(checkAnswer(response, searchString) == true) {
+            addRightAnswerToList(searchString);
+            currentFirstLetter = getLastLetter(searchString);
+            response["currentFirstLetter"] = currentFirstLetter;
+            score++
+            response["score"] = score
+            setNewTime();
+            socket.emit("correctAnswer", response);
+            storeArtistInDatabase(response.artists.items[0])
+          } else {
+            socket.emit("wrongAnswer", response);
+          }
+
+        });
+
       }
     });
   }
