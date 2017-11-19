@@ -62,8 +62,41 @@ module.exports = app;
 io.on('connection', function(socket){
   console.log('user with id: '+ socket.id + ' connected');
 
+
+  var request = require('request'); // "Request" library
+
+  var client_id = 'a5bf491d67f040c68bb4d7e829cb5a74'; // Your client id
+  var client_secret = '49e7e953975a47e284ee0fc61424250d'; // Your secret
+  var options;
+
+  // your application requests authorization
+  var authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+      'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+    },
+    form: {
+      grant_type: 'client_credentials'
+    },
+    json: true
+  };
+
+
+  request.post(authOptions, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      // use the access token to access the Spotify Web API
+      var token = body.access_token;
+      options = {
+        uri: "https://api.spotify.com/v1/search?q="+ searchString +"&limit=1&type=artist",
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        json: true
+      };
+    }
+  });
+
   var score = 0;
-  const request = require('request-promise')
   var INITTIME = 30;
   var MAXTIME = 60;
   var time = INITTIME;
@@ -101,29 +134,23 @@ io.on('connection', function(socket){
         return
       }
     }
-    const options = {  
-      method: 'GET',
-      uri: "https://api.spotify.com/v1/search?q="+ searchString +"&limit=1&type=artist",
-      json: true
-    }
-    request(options)  
-      .then(function (response) {
-        if(checkAnswer(response, searchString) == true) {
-          addRightAnswerToList(searchString);
-          currentFirstLetter = getLastLetter(searchString);
-          response["currentFirstLetter"] = currentFirstLetter;
-          score++
-          response["score"] = score
-          setNewTime();
-          socket.emit("correctAnswer", response);
-          storeArtistInDatabase(response.artists.items[0])
-        } else {
-          socket.emit("wrongAnswer", response);
-        }
-      })
-      .catch(function (err) {
-        console.log(err);
-      })
+
+    request.get(options, function(error, response, body) {
+      console.log(body);
+
+      if(checkAnswer(response, searchString) == true) {
+        addRightAnswerToList(searchString);
+        currentFirstLetter = getLastLetter(searchString);
+        response["currentFirstLetter"] = currentFirstLetter;
+        score++
+        response["score"] = score
+        setNewTime();
+        socket.emit("correctAnswer", response);
+        storeArtistInDatabase(response.artists.items[0])
+      } else {
+        socket.emit("wrongAnswer", response);
+      }
+    });
   }
 
   function storeArtistInDatabase(artist){
@@ -137,7 +164,7 @@ io.on('connection', function(socket){
       }
       client.query('WITH upsert AS (UPDATE artists SET count=count+1, name=($2) WHERE uri=($1) RETURNING *) INSERT INTO artists (uri, name, count) SELECT ($1),($2),1 WHERE NOT EXISTS (SELECT * FROM upsert);',
       [data.uri, data.name]);
-      
+
       const query = client.query('SELECT * FROM artists ORDER BY count DESC');
       query.on('row', (row) => {
         results.push(row);
@@ -211,7 +238,7 @@ io.on('connection', function(socket){
       }
       else if (stringArray[0] = "the") {
         stringArray.shift();
-        name = stringArray.join(" ");    
+        name = stringArray.join(" ");
         if (name == string) {
           returnValue = true
         }
@@ -246,7 +273,7 @@ io.on('connection', function(socket){
 
   function gameOver() {
     gameInProgress = false
-    
+
     clearInterval(currentTiming);
     currentTiming = undefined
 
@@ -255,14 +282,14 @@ io.on('connection', function(socket){
 
   function startTimer () {
     gameInProgress = true
-    
+
     currentTiming = setInterval(function() {
       time = time - 1;
       if(time == 0)
         gameOver();
       socket.emit('time', time);
     }, 1000)
-  
+
   }
 
   function resetTime() {
@@ -271,11 +298,10 @@ io.on('connection', function(socket){
   }
 
   function setNewTime() {
-    clearInterval(currentTiming);  
+    clearInterval(currentTiming);
     currentTiming = null
     time = Math.min(MAXTIME, time+5);
     startTimer();
   }
 
 });
-
