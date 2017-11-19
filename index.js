@@ -135,21 +135,19 @@ io.on('connection', function(socket){
         request.get(options, function(error, response, body) {
           console.log(body);
 
-          if(checkAnswer(response, searchString) == true) {
+          if(checkAnswer(body, searchString) == true) {
             addRightAnswerToList(searchString);
             currentFirstLetter = getLastLetter(searchString);
             response["currentFirstLetter"] = currentFirstLetter;
-            score++
-            response["score"] = score
+            score++;
+            body["score"] = score;
             setNewTime();
-            socket.emit("correctAnswer", response);
-            storeArtistInDatabase(response.artists.items[0])
+            socket.emit("correctAnswer", body);
+            storeArtistInDatabase(body.artists.items[0])
           } else {
-            socket.emit("wrongAnswer", response);
+            socket.emit("wrongAnswer", body);
           }
-
         });
-
       }
     });
   }
@@ -212,7 +210,6 @@ io.on('connection', function(socket){
   }
 
   function checkAnswer(response, searchString) {
-    console.log('response: ', response);
     if (compareWordToResponseList(response.artists.items, searchString)){
       if (compareWordToArrayList(rightAnswers, searchString)) {
         return false;
