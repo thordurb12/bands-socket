@@ -138,7 +138,7 @@ io.on('connection', function(socket){
           if(checkAnswer(body, searchString) == true) {
             addRightAnswerToList(searchString);
             currentFirstLetter = getLastLetter(searchString);
-            response["currentFirstLetter"] = currentFirstLetter;
+            body["currentFirstLetter"] = currentFirstLetter;
             score++;
             body["score"] = score;
             setNewTime();

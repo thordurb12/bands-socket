@@ -76,7 +76,6 @@ $(function() {
   });
 
   function prepareNextRound(response) {
-    console.log('response: ', response);
     $('#textfield').val(response.currentFirstLetter);
     var artist = response.artists.items[0];
     addImage(artist.images[0], response.score, artist.external_urls.spotify);
