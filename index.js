@@ -61,14 +61,12 @@ module.exports = app;
 
 io.on('connection', function(socket){
   console.log('user with id: '+ socket.id + ' connected');
-
-
   var request = require('request'); // "Request" library
 
   var client_id = 'a5bf491d67f040c68bb4d7e829cb5a74'; // Your client id
   var client_secret = '49e7e953975a47e284ee0fc61424250d'; // Your secret
 
-  // your application requests authorization
+  // your spotify requests authorization
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     headers: {
@@ -121,7 +119,7 @@ io.on('connection', function(socket){
     request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
 
-        // use the access token to access the Spotify Web API
+        // access token to access the Spotify Web API
         var token = body.access_token;
         var options = {
           uri: "https://api.spotify.com/v1/search?q="+ encodeURIComponent(searchString) +"&limit=1&type=artist",
@@ -132,8 +130,6 @@ io.on('connection', function(socket){
         };
 
         request.get(options, function(error, response, body) {
-          console.log(body);
-
           if(checkAnswer(body, searchString) == true) {
             addRightAnswerToList(searchString);
             currentFirstLetter = getLastLetter(searchString);

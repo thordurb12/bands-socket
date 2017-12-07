@@ -76,7 +76,8 @@ $(function() {
   });
 
   function prepareNextRound(response) {
-    $('#textfield').val(response.currentFirstLetter);
+    currentFirstLetter = response.currentFirstLetter;
+    $('#textfield').val(currentFirstLetter);
     var artist = response.artists.items[0];
     addImage(artist.images[0], response.score, artist.external_urls.spotify);
   }
@@ -178,9 +179,8 @@ $(function() {
   $('#textfield').keydown(function (e) {
     var key = e.which;
     if(key == 13){
-
       sendAnswerToAPI();
-    } else if (key == 8) {
+    } else if ((key == 8 || key == 46) && currentFirstLetter !== "") {
       if ($('#textfield').val().length == 1){
         e.preventDefault()
       }
@@ -265,7 +265,6 @@ function displayImages () {
     div.style.backgroundImage = "url("+image.src+")";
     target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>');
     $('.image-wrap').last().html(div);
-
   });
 
   var numPlaceHolders = Math.max(8 - images.length, 0);
