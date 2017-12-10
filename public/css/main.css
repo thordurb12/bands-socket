@@ -64,13 +64,14 @@ body {
       margin-top: 20px; }
     body #init-wrap .random-rectangle {
       background: #eff5f8;
-      padding-top: 100%;
-      margin-top: 10%;
-      margin-bottom: 10%;
-      width: 100%;
+      border: 5px solid #ebf2f5;
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center; }
+      background-position: center;
+      width: 100%;
+      padding-top: 40%; }
+      body #init-wrap .random-rectangle.col-md-3.col-sm-3 {
+        padding-top: 20%; }
   body #upper-section {
     text-align: center; }
     body #upper-section .wrap {
@@ -186,10 +187,8 @@ body {
 
 #highscore-wrap {
   padding-bottom: 3rem; }
-  #highscore-wrap #highscore-container {
-    border-bottom: 1px solid #b1b2b1;
-    border-top: 1px solid #b1b2b1; }
   #highscore-wrap .highscores {
+    border-bottom: 1px solid #b1b2b1;
     padding-bottom: 2rem;
     padding: 20px 20px; }
     #highscore-wrap .highscores h3 {

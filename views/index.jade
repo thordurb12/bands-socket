@@ -34,7 +34,7 @@ block content
          h3 SHARE
          .row.center
            .col-xs-6.col-md-2.col-lg-1.center.twitter
-             a(target="_blank", href="https://twitter.com/intent/tweet?text=http://bands.staf.li/")
+             a(target="_blank", href="https://twitter.com/intent/tweet?text=bandsgame.com")
                img.float-left(src="/images/twitter.svg")
              a.facebook
                img.float-left(src="/images/facebook.svg")
@@ -140,8 +140,10 @@ block content
     #highscore-wrap.row.center-xs.active-game
       #highscore-container.col-xs-12.col-sm-8.col-md-7.col-lg-5
         .row.center
+          .border
           .highscores.col-xs-12.col-sm-10.col-md-8.col-lg-8
             h3 HIGH SCORES
+          .border
 
     script#highscore-row(type='x-tmpl-mustache').
       <div class="row"><div class="index">{{index}}</div><div class="name">{{ name }}</div><div class="score">{{ score }}</div></div>
@@ -149,7 +151,7 @@ block content
   script.
     function renderCover(selector, index, mdColNum, smColNum) {
       var image = "../images/bands/" + index + ".jpg";
-      $(selector).append('<div class="col-md-'+ mdColNum +' col-sm-'+ smColNum +'"><div class="random-rectangle" style="background-image: url('+ image +')" ></div></div>');
+      $(selector).append('<div class="col-md-'+ mdColNum +' col-sm-'+ smColNum +' random-rectangle" style="background-image: url('+ image +')" ></div>');
     }
     _(20).times(function(i) {
       renderCover("#left-side", i+1, 6, 6);

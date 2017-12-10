@@ -85,13 +85,14 @@ body
       margin-top: 20px
     .random-rectangle
       background: $gray
-      padding-top: 100%
-      margin-top: 10%
-      margin-bottom: 10%
-      width: 100%
+      border: 5px solid $blue
       background-repeat: no-repeat
       background-size: cover
       background-position: center
+      width: 100%
+      padding-top: 40%
+      &.col-md-3.col-sm-3
+        padding-top: 20%
 
   #upper-section
     text-align: center
@@ -212,11 +213,9 @@ body
 
 #highscore-wrap
   padding-bottom: 3rem
-  #highscore-container
-    border-bottom: 1px solid $border-color
-    border-top: 1px solid $border-color
-
   .highscores
+    .border
+    border-bottom: 1px solid $border-color
     padding-bottom: 2rem
     padding: 20px 20px
     h3
