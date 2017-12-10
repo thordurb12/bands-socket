@@ -188,9 +188,10 @@ body {
 #highscore-wrap {
   padding-bottom: 3rem; }
   #highscore-wrap .highscores {
-    border-bottom: 1px solid #b1b2b1;
     padding-bottom: 2rem;
     padding: 20px 20px; }
+    #highscore-wrap .highscores .border {
+      border-bottom: 1px solid #b1b2b1; }
     #highscore-wrap .highscores h3 {
       font-size: 0.7rem; }
     #highscore-wrap .highscores .row {
