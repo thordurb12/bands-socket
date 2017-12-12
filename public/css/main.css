@@ -1,4 +1,4 @@
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 845px) {
   .show-for-small-only {
     display: block; } }
 
@@ -134,8 +134,8 @@ body {
           font-weight: 600;
           font-size: 1.5em; }
 
-@media screen and (max-width: 480px) {
-  .image-wrap.hide-for-small {
+@media screen and (max-width: 845px) {
+  .hide-for-small {
     display: none !important; }
 
   #timer-wrap, #replay-section {
@@ -145,7 +145,10 @@ body {
     height: 130px !important; }
 
   #instructions {
-    padding: 0px !important; } }
+    padding: 0px !important; }
+
+  .random-rectangle {
+    display: none; } }
 @media screen and (max-width: 600px) {
   .image-wrap.hide-for-medium {
     display: none !important; } }
@@ -197,7 +200,7 @@ body {
     #highscore-wrap .highscores h3 {
       font-size: 0.7rem; }
     #highscore-wrap .highscores .row {
-      padding: 5px;
+      padding: 10px 20px;
       margin: 0 auto;
       background: #ebf2f5; }
       #highscore-wrap .highscores .row:nth-child(even) {

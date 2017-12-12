@@ -8,7 +8,7 @@ $font-color: rgb(76,76,76)
 $button-blue: #7cc1d4
 $button-border: rgb(111,174,193)
 
-$break-small: 480px
+$break-small: 845px
 $break-medium: 600px
 $break-large: 1024px
 
@@ -97,6 +97,7 @@ body
       padding-top: 40%
       &.col-md-3.col-sm-3
         padding-top: 20%
+      
 
   #upper-section
     text-align: center
@@ -164,7 +165,7 @@ body
               font-size: 1.5em
 
 @media screen and (max-width: $break-small)
-  .image-wrap.hide-for-small
+  .hide-for-small
     display: none !important
   #timer-wrap, #replay-section
     height: 115px !important
@@ -172,6 +173,8 @@ body
     height: 130px !important
   #instructions
     padding: 0px !important
+  .random-rectangle
+    display: none
 
 @media screen and (max-width: $break-medium)
   .image-wrap.hide-for-medium

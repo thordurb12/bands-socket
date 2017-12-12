@@ -151,7 +151,7 @@ block content
   script.
     function renderCover(selector, index, mdColNum, smColNum) {
       var image = "../images/bands/" + index + ".jpg";
-      $(selector).append('<div class="col-md-'+ mdColNum +' col-sm-'+ smColNum +' random-rectangle" style="background-image: url('+ image +')" ></div>');
+      $(selector).append('<div class="hide-for-small col-md-'+ mdColNum +' col-sm-'+ smColNum +' random-rectangle" style="background-image: url('+ image +')" ></div>');
     }
     _(20).times(function(i) {
       renderCover("#left-side", i+1, 6, 6);
