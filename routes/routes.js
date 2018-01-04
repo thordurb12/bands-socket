@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const request = require('request-promise')
 const bodyParser= require('body-parser')
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/bands';
+const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/thordur';
 const pg = require('pg');
 
 /* GET home page. */
