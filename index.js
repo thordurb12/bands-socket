@@ -191,8 +191,6 @@ io.on('connection', function(socket){
 
   function submitHighscore(name) {
     const results = [];
-      // Grab data from http request
-      const data = {name: name, score: score};
       // Get a Postgres client from the connection pool
 
       if(name.length > 40) {
@@ -207,7 +205,7 @@ io.on('connection', function(socket){
         }
         // SQL Query > Insert data
         client.query('INSERT INTO highscores(name, score) values($1, $2)',
-        [data.name, data.score]);
+        [name, score]);
         // SQL Query > Select Data
         const query = client.query('SELECT * FROM highscores ORDER BY id ASC');
         // Stream results back one row at a time

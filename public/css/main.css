@@ -228,9 +228,8 @@ body {
 
 #all-images-wrap {
   overflow: hidden;
-  border-bottom: 1px solid #b1b2b1;
   padding-bottom: 1rem;
-  max-height: 25vh; }
+  padding-top: 1rem; }
   #all-images-wrap.show-all {
     max-height: none;
     border-bottom: none; }
@@ -242,8 +241,17 @@ body {
       background-color: white;
       background-size: cover;
       background-position: center;
-      margin-top: 1rem;
+      position: relative;
+      margin-bottom: 1rem;
       border: 1px solid #b1b2b1; }
+      #all-images-wrap #all-images .image-wrap div .playback-overlay {
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        background: rgba(0, 0, 0, 0.3);
+        background-repeat: no-repeat;
+        background-position: center; }
 
 #load-more-button-wrap {
   text-align: center; }

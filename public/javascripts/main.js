@@ -1,6 +1,7 @@
 var currentFirstLetter = "";
 var score = 0;
 var images = []
+var currentSongUrl = "";
 
 $(function() {
 
@@ -77,10 +78,10 @@ $(function() {
     currentFirstLetter = response.currentFirstLetter;
     $('#textfield').val(currentFirstLetter);
     var artist = response.artistInfo.artists.items[0];
-    addImage(artist.images[0], response.artistInfo.score, artist.external_urls.spotify, response.tracks.tracks[0].preview_url);
+    addImage(artist.images[0], score, artist.external_urls.spotify, response.tracks.tracks[0].preview_url);
   }
 
-  function addImage(image,score, artistUrl, trackUrl) {
+  function addImage(image, score, artistUrl, trackUrl) {
     var numberOfImages = $('.has-content').length;
     addToImageWall(image, trackUrl)
 
@@ -160,10 +161,6 @@ $(function() {
     if(name.length > 0) {
       submitHighscore(name)
     }
-  })
-
-  $('#load-more-button').click(function(e) {
-    showAllImages()
   })
 
   $('#play-button').click(function(e) {
@@ -257,22 +254,37 @@ function checkOverflow(el) {
  return isOverflowing;
 }
 
-function playTrack(url){
-  console.log(url);
+function playTrack(url, div){
+  var audioElement = document.getElementById("audioPlayer");
+  audioElement.setAttribute('src', url);
+  if (currentSongUrl !== url) {
+    audioElement.play();
+    $('.playback-overlay').css('background-image', "url(/images/play.svg)");
+    $(div).find('.playback-overlay').css('background-image', "url(/images/stop.svg)");
+    $("#audioPlayer").bind('ended', function(){
+      $('.playback-overlay').css('background-image', "url(/images/play.svg)");
+    });
+    currentSongUrl = url;
+  } else {
+    audioElement.pause();
+    $(div).find('.playback-overlay').css('background-image', "url(/images/play.svg)");
+    currentSongUrl = "";
+  }
 };
-
-$('.image-wrap').click(function(e) {
-  var url = $(e.target).data('id');
-  playTrack(url)
-});
-
 
 function displayImages () {
   var target = $('#all-images')
   _.each(images, function(imageObj) {
     var div = document.createElement('div');
-    div.style.backgroundImage = "url("+imageObj.image.src+")"
-    target.append('<div data-track="' + imageObj.trackUrl +'" class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>');
+    div.onclick = function() {
+      playTrack(imageObj.trackUrl, div);
+    };
+    div.style.backgroundImage = "url("+imageObj.image.src+")";
+    var overlay = document.createElement('div');
+    overlay.style.backgroundImage = "url(/images/play.svg)";
+    overlay.className = "playback-overlay"; 
+    div.appendChild(overlay)
+    target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>');
     $('.image-wrap').last().html(div);
   });
 
@@ -281,20 +293,6 @@ function displayImages () {
   for(var i = 0; i < numPlaceHolders; i++) {
       target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"><div class="placeholder"></div></div>');
   }
-
-  var isOverflowing = checkOverflow(document.getElementById('all-images-wrap'))
-
-  if(!isOverflowing || images.length < 4) {
-    $('#load-more-button').addClass('hide');
-    $('#all-images-wrap').addClass('show-all');
-  }
-}
-
-
-function showAllImages() {
-  var target = $('#all-images-wrap');
-  target.addClass('show-all');
-  $('#load-more-button').addClass('hide');
 }
 
 function focusTextField() {
