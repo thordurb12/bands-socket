@@ -46,8 +46,8 @@ $(function() {
 
   var socket = io();
   socket.on('correctAnswer',function(response){
-    score = response.artistInfo.score
     console.log(response)
+    score = response.artistInfo.score
     prepareNextRound(response);
   });
 
