@@ -135,7 +135,6 @@ io.on('connection', function(socket){
             currentFirstLetter = getLastLetter(searchString);
             body["currentFirstLetter"] = currentFirstLetter;
             score++;
-            body["score"] = score;
             setNewTime();
             storeArtistInDatabase(body.artists.items[0])
             
@@ -152,7 +151,8 @@ io.on('connection', function(socket){
             request.get(trackOptions, function(error, response, body) {
                 var load = {
                   "artistInfo" : artistInfo,
-                  "tracks" : body
+                  "tracks" : body,
+                  "score" : score
                 }
                 socket.emit("correctAnswer", load);
             });
