@@ -137,12 +137,30 @@ io.on('connection', function(socket){
             score++;
             body["score"] = score;
             setNewTime();
-            socket.emit("correctAnswer", body);
             storeArtistInDatabase(body.artists.items[0])
+            
+            let artistInfo = body;
+
+            var id = body.artists.items[0].id;
+            var trackOptions = {
+              uri: "https://api.spotify.com/v1/artists/"+ id +"/top-tracks?country=US",
+              headers: {
+                'Authorization': 'Bearer ' + token
+              },
+              json: true
+            };    
+            request.get(trackOptions, function(error, response, body) {
+                var load = {
+                  "artistInfo" : artistInfo,
+                  "tracks" : body
+                }
+                socket.emit("correctAnswer", load);
+            });
           } else {
             socket.emit("wrongAnswer", body);
           }
         });
+        
       }
     });
   }

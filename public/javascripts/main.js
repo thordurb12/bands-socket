@@ -46,7 +46,7 @@ $(function() {
 
   var socket = io();
   socket.on('correctAnswer',function(response){
-    score = response.score
+    score = response.artistInfo.score
     prepareNextRound(response);
   });
 
@@ -56,7 +56,6 @@ $(function() {
 
   socket.on('gameOver',function(score){
     console.log('gameOver')
-
     gameOver(score);
   });
 
@@ -71,20 +70,19 @@ $(function() {
 
   socket.on('time', function(currTime) {
     var timer = $('#timer');
-    console.log(currTime);
     timer.html(currTime);
   });
 
   function prepareNextRound(response) {
-    currentFirstLetter = response.currentFirstLetter;
+    currentFirstLetter = response.artistInfo.currentFirstLetter;
     $('#textfield').val(currentFirstLetter);
-    var artist = response.artists.items[0];
-    addImage(artist.images[0], response.score, artist.external_urls.spotify);
+    var artist = response.artistInfo.artists.items[0];
+    addImage(artist.images[0], response.artistInfo.score, artist.external_urls.spotify, response.tracks.tracks[0].preview_url);
   }
 
-  function addImage(image,score, artistUrl) {
+  function addImage(image,score, artistUrl, trackUrl) {
     var numberOfImages = $('.has-content').length;
-    addToImageWall(image)
+    addToImageWall(image, trackUrl)
 
     if(score <= 9) {
       score = "0" + score;
@@ -210,12 +208,13 @@ function indicateWrongAnswer() {
   $("#textfield").effect( "shake", {times:1}, 200 );
 }
 
-function addToImageWall(image) {
+function addToImageWall(image, trackUrl) {
   if(image != undefined){
     var url = image.url
     var image = new Image()
     image.src = url;
-    images.push(image);
+    var imageObj = {"image": image, "trackUrl": trackUrl};
+    images.push(imageObj);
   }
 }
 
@@ -258,12 +257,22 @@ function checkOverflow(el) {
  return isOverflowing;
 }
 
+function playTrack(url){
+  console.log(url);
+};
+
+$('.image-wrap').click(function(e) {
+  var url = $(e.target).data('id');
+  playTrack(url)
+});
+
+
 function displayImages () {
   var target = $('#all-images')
-  _.each(images, function(image) {
+  _.each(images, function(imageObj) {
     var div = document.createElement('div');
-    div.style.backgroundImage = "url("+image.src+")";
-    target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>');
+    div.style.backgroundImage = "url("+imageObj.image.src+")"
+    target.append('<div data-track="' + imageObj.trackUrl +'" class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>');
     $('.image-wrap').last().html(div);
   });
 
@@ -280,6 +289,7 @@ function displayImages () {
     $('#all-images-wrap').addClass('show-all');
   }
 }
+
 
 function showAllImages() {
   var target = $('#all-images-wrap');
