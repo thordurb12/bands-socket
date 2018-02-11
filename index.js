@@ -133,7 +133,6 @@ io.on('connection', function(socket){
           if(checkAnswer(body, searchString) == true) {
             addRightAnswerToList(searchString);
             currentFirstLetter = getLastLetter(searchString);
-            body["currentFirstLetter"] = currentFirstLetter;
             score++;
             setNewTime();
             storeArtistInDatabase(body.artists.items[0])
@@ -152,7 +151,8 @@ io.on('connection', function(socket){
                 var load = {
                   "artistInfo" : artistInfo,
                   "tracks" : body,
-                  "score" : score
+                  "score" : score,
+                  "currentFirstLetter" : currentFirstLetter
                 }
                 socket.emit("correctAnswer", load);
             });
