@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="157px" height="157px" viewBox="0 0 157 157" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="55px" height="63px" viewBox="0 0 55 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
     <title>play</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-311.000000, -197.000000)" stroke="#FFFFFF">
-            <g id="play" transform="translate(314.000000, 200.000000)">
+        <g id="Artboard" transform="translate(-406.000000, -245.000000)" stroke-width="3.5" stroke="#FFFFFF" fill="#FFFFFF">
+            <g id="play" transform="translate(408.000000, 248.000000)">
                 <g id="Group">
-                    <g id="Circle" stroke-width="6">
-                        <circle id="Oval" cx="75.65" cy="75.65" r="75.2"></circle>
-                    </g>
-                    <g id="Triangle" transform="translate(51.000000, 35.000000)" stroke-width="5" fill="#FFFFFF">
-                        <polygon id="Shape" points="0 0.05 70.35 40.65 0 81.3"></polygon>
+                    <g id="Triangle">
+                        <polygon id="Shape" points="0 0.0347560976 49.5422535 28.2567073 0 56.5134146"></polygon>
                     </g>
                 </g>
             </g>
