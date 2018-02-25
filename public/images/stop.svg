@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="57px" height="57px" viewBox="0 0 57 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="29px" height="29px" viewBox="0 0 29 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
     <title>stop</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-552.000000, -254.000000)" fill="#FFFFFF">
-            <g id="stop" transform="translate(552.000000, 254.000000)">
-                <g id="Group">
-                    <rect id="Rectangle" x="0.351851852" y="0.351851852" width="56.2962963" height="56.2962963"></rect>
+        <g id="stop" fill="#FFFFFF">
+            <g id="Page-1">
+                <g>
+                    <g id="Artboard">
+                        <g id="stop">
+                            <g id="Group">
+                                <rect id="Rectangle" x="0.179012346" y="0.179012346" width="28.6419753" height="28.6419753"></rect>
+                            </g>
+                        </g>
+                    </g>
                 </g>
             </g>
         </g>
