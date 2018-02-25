@@ -3,7 +3,7 @@ var score = 0;
 var images = []
 var currentSongUrl = "";
 
-$(function() {
+$(function () {
 
   $('#image-carousel').slick({
     infinite: false,
@@ -78,22 +78,22 @@ $(function() {
     currentFirstLetter = response.currentFirstLetter;
     $('#textfield').val(currentFirstLetter);
     var artist = response.artistInfo.artists.items[0];
-    addImage(artist.images[0], score, artist.external_urls.spotify, response.tracks.tracks[0].preview_url);
+    addImage(artist.images[0], score, artist.external_urls.spotify, response.tracks.tracks[0].preview_url, artist.name);
   }
 
-  function addImage(image, score, artistUrl, trackUrl) {
+  function addImage(image, score, artistUrl, trackUrl, name) {
     var numberOfImages = $('.has-content').length;
-    addToImageWall(image, trackUrl)
+    addToImageWall(image, trackUrl, name)
 
-    if(score <= 9) {
+    if (score <= 9) {
       score = "0" + score;
-    } else if (score <= 99){
+    } else if (score <= 99) {
       score = "0" + score;
     }
-    if(image != null) {
-      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"><a href="' + artistUrl +'" target="_blank" class="overlay"><span>' + score + '</a></div></div>',5+numberOfImages, true);
+    if (image != null) {
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image" style="background-image: url(' + image.url + ');"><a href="' + artistUrl + '" target="_blank" class="overlay"><span>' + score + '</a></div></div>', 5 + numberOfImages, true);
     } else {
-      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image"><a href="' + artistUrl +'" target="_blank" class="overlay"><span>' + score + '</a></div></div>',5+numberOfImages, true);
+      $('#image-carousel').slickAdd('<div class="image-wrap has-content"><div class="image"><a href="' + artistUrl + '" target="_blank" class="overlay"><span>' + score + '</a></div></div>', 5 + numberOfImages, true);
     }
     $('#image-carousel:last-child').slickNext()
   }
@@ -151,117 +151,117 @@ $(function() {
     socket.emit('submitHighscore', name);
   }
 
-  socket.on('highscorecSubmitted', function() {
+  socket.on('highscorecSubmitted', function () {
     $('#submit-wrap').addClass('hide');
     $('#thanks-wrap').removeClass('hide');
   })
 
-  $('#submit-button').click(function(e) {
+  $('#submit-button').click(function (e) {
     var name = $('#submit-input').val()
-    if(name.length > 0) {
+    if (name.length > 0) {
       submitHighscore(name)
     }
   })
 
-  $('#play-button').click(function(e) {
+  $('#play-button').click(function (e) {
     removeInitialScreen();
   })
 
-  $('#replay-button').click(function(e) {
+  $('#replay-button').click(function (e) {
     playAgain();
   })
 
   $('#textfield').keydown(function (e) {
     var key = e.which;
-    if(key == 13){
+    if (key == 13) {
       sendAnswerToAPI();
     } else if ((key == 8 || key == 46) && currentFirstLetter !== "") {
-      if ($('#textfield').val().length == 1){
+      if ($('#textfield').val().length == 1) {
         e.preventDefault()
       }
     }
   });
 
-  $('.facebook').on('click', function(e) {
-      e.preventDefault();
-      FB.ui(
-        {
-      app_id: '1798128600435648',
-      method: 'share',
-      name: 'Name a band | How far can you get?',
-      link: window.location.href,
-      href: window.location.href,
-      image: 'http://bands.staf.li/public/images/fb.jpg',
-      description: 'I got ' + score
-          },
-        function(response) {
-          //do noting
-        }
-      );
+  $('.facebook').on('click', function (e) {
+    e.preventDefault();
+    FB.ui(
+      {
+        app_id: '1798128600435648',
+        method: 'share',
+        name: 'Name a band | How far can you get?',
+        link: window.location.href,
+        href: window.location.href,
+        image: 'http://bands.staf.li/public/images/fb.jpg',
+        description: 'I got ' + score
+      },
+      function (response) {
+        //do noting
+      }
+    );
   });
 });
 
 function indicateWrongAnswer() {
-  $("#textfield").effect( "shake", {times:1}, 200 );
+  $("#textfield").effect("shake", { times: 1 }, 200);
 }
 
-function addToImageWall(image, trackUrl) {
-  if(image != undefined){
+function addToImageWall(image, trackUrl, name) {
+  if (image != undefined) {
     var url = image.url
     var image = new Image()
     image.src = url;
-    var imageObj = {"image": image, "trackUrl": trackUrl};
+    var imageObj = { "image": image, "trackUrl": trackUrl, "name": name };
     images.push(imageObj);
   }
 }
 
 function showHighscores() {
-  var request = $.get('/api/highscores' , function(res) {
+  var request = $.get('/api/highscores', function (res) {
     renderHighscore(res)
   })
-  .fail(function() {
-    console.log('error')
-  });
+    .fail(function () {
+      console.log('error')
+    });
 }
 
 function renderHighscore(list) {
-    var template = $('#highscore-row').html();
-    Mustache.parse(template);
-    var index = 1;
-    for (var key in list) {
-      var entry = list[key]
-      var entryIndex = index;
-      if(entryIndex <= 9) {
-        entryIndex = "0" + entryIndex;
-      }
-      var rendered = Mustache.render(template, {index: entryIndex, name: entry.name, score: entry.score});
-      index++;
-      $('.highscores').append(rendered);
+  var template = $('#highscore-row').html();
+  Mustache.parse(template);
+  var index = 1;
+  for (var key in list) {
+    var entry = list[key]
+    var entryIndex = index;
+    if (entryIndex <= 9) {
+      entryIndex = "0" + entryIndex;
     }
+    var rendered = Mustache.render(template, { index: entryIndex, name: entry.name, score: entry.score });
+    index++;
+    $('.highscores').append(rendered);
+  }
 }
 
 function checkOverflow(el) {
- var curOverflow = el.style.overflow;
+  var curOverflow = el.style.overflow;
 
- if ( !curOverflow || curOverflow === "visible" )
+  if (!curOverflow || curOverflow === "visible")
     el.style.overflow = "hidden";
 
- var isOverflowing = el.clientWidth < el.scrollWidth
+  var isOverflowing = el.clientWidth < el.scrollWidth
     || el.clientHeight < el.scrollHeight;
 
- el.style.overflow = curOverflow;
+  el.style.overflow = curOverflow;
 
- return isOverflowing;
+  return isOverflowing;
 }
 
-function playTrack(url, div){
+function playTrack(url, div) {
   var audioElement = document.getElementById("audioPlayer");
   audioElement.setAttribute('src', url);
   if (currentSongUrl !== url) {
     audioElement.play();
     $('.playback-overlay').css('background-image', "url(/images/play.svg)");
     $(div).find('.playback-overlay').css('background-image', "url(/images/stop.svg)");
-    $("#audioPlayer").bind('ended', function(){
+    $("#audioPlayer").bind('ended', function () {
       $('.playback-overlay').css('background-image', "url(/images/play.svg)");
     });
     currentSongUrl = url;
@@ -272,26 +272,32 @@ function playTrack(url, div){
   }
 };
 
-function displayImages () {
+function displayImages() {
   var target = $('#all-images')
-  _.each(images, function(imageObj) {
+  _.each(images, function (imageObj) {
     var div = document.createElement('div');
-    div.onclick = function() {
-      playTrack(imageObj.trackUrl, div);
-    };
-    div.style.backgroundImage = "url("+imageObj.image.src+")";
+    div.style.backgroundImage = "url(" + imageObj.image.src + ")";
     var overlay = document.createElement('div');
-    overlay.style.backgroundImage = "url(/images/play.svg)";
-    overlay.className = "playback-overlay"; 
+    if (imageObj.trackUrl !== null) {
+      div.onclick = function () {
+        playTrack(imageObj.trackUrl, div);
+      };
+      overlay.style.backgroundImage = "url(/images/play.svg)";
+    };
+    overlay.className = "playback-overlay";
     div.appendChild(overlay)
+    var paragraph = document.createElement('p');
+    var node = document.createTextNode(imageObj.name);
+    paragraph.appendChild(node);
+    overlay.appendChild(paragraph);
     target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"></div>');
     $('.image-wrap').last().html(div);
   });
 
   var numPlaceHolders = Math.max(8 - images.length, 0);
 
-  for(var i = 0; i < numPlaceHolders; i++) {
-      target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"><div class="placeholder"></div></div>');
+  for (var i = 0; i < numPlaceHolders; i++) {
+    target.append('<div class="image-wrap col-xs-6 col-sm-4 col-md-3 col-lg-3"><div class="placeholder"></div></div>');
   }
 }
 
